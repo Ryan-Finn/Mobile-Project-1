@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Project 1</string>
+    <string name="NameInput1Hint">Player 1 Name</string>
+    <string name="NameInput2Hint">Player 2 Name</string>
+    <string name="RoundsInputHint">Number of Rounds (0-inf)</string>
+    <string name="WelcomeText">Project 1 Mobile Computing (Placeholder)</string>
+    <string name="StartButtonText">START GAME</string>
 </resources>
+

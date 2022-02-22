@@ -69,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@color/green"
+        android:onClick="onStart"
         android:text="@string/StartButtonText"
         app:layout_constraintEnd_toEndOf="@+id/roundsInput"
         app:layout_constraintStart_toStartOf="@+id/roundsInput"

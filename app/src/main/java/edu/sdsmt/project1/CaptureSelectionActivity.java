@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import edu.sdsmt.project1.Control.GameBoardActivity;
+
 public class CaptureSelectionActivity extends AppCompatActivity {
 
     @Override

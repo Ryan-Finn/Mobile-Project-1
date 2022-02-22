@@ -5,5 +5,9 @@
     <string name="RoundsInputHint">Number of Rounds (0-inf)</string>
     <string name="WelcomeText">Project 1 Mobile Computing (Placeholder)</string>
     <string name="StartButtonText">START GAME</string>
+    <string name="circle_description">Circle_Capture</string>
+    <string name="rect_description">Rectangle Image</string>
+    <string name="line_description">Line image</string>
+    <string name="capture_options">Capture Options</string>
 </resources>
 

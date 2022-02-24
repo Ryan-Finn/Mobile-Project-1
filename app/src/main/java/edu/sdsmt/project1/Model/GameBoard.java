@@ -5,13 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GameBoard {
-    private final View view;
     private static final Random random = new Random();
     public final ArrayList<Collectable> collectables = new ArrayList<>();
     private final static String LOCATIONS = "GameBoard.locations";
@@ -19,9 +19,11 @@ public class GameBoard {
     final static float SCALE_IN_VIEW = 1.0f;
     private final Paint fillPaint;
     private final Paint outlinePaint;
+    private final Paint capturePaint;
+    private CaptureObject capture = null;
+    private int CaptureOption = 0;
 
     public GameBoard(View v, Context context) {
-        view = v;
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(0xffcccccc);
@@ -30,6 +32,10 @@ public class GameBoard {
         outlinePaint.setStyle(Paint.Style.STROKE);
         outlinePaint.setColor(Color.BLUE);
         outlinePaint.setStrokeWidth(5.0f);
+
+        capturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        capturePaint.setColor(Color.RED);
+        capturePaint.setAlpha(100);
 
         for (int i = 0; i < 20; i++) {
             Collectable collectable = new Collectable(context, edu.sdsmt.project1.R.drawable.collectable);
@@ -52,7 +58,12 @@ public class GameBoard {
 
         for(Collectable collectable : collectables) {
             collectable.shuffle(canvas, canvasX, canvasY, 0.2f, random);
+            collectable.setShuffle(false);
             collectable.draw(canvas, canvasX, canvasY, 0.2f);
+        }
+
+        if (capture != null) {
+            capture.draw(canvas, capturePaint);
         }
     }
 
@@ -64,8 +75,37 @@ public class GameBoard {
         return true;
     }
 
-    public boolean onTouchEvent(MotionEvent event) {
-        return true;
+    public boolean onTouchEvent(View view, MotionEvent event) {
+        switch (event.getActionMasked()) {
+
+            case MotionEvent.ACTION_DOWN:
+                if (CaptureOption == 0)
+                    capture = new CircleCapture();
+                else if (CaptureOption == 1)
+                    capture = new SquareCapture();
+                else if (CaptureOption == 2)
+                    capture = new LineCapture();
+
+                capture.setX(event.getX());
+                capture.setY(event.getY());
+                view.invalidate();
+                return true;
+
+            case MotionEvent.ACTION_UP:
+
+            case MotionEvent.ACTION_CANCEL:
+                capture = null;
+                view.invalidate();
+                return true;
+
+            case MotionEvent.ACTION_MOVE:
+                // If we are dragging, move the piece
+                capture.setX(event.getX());
+                capture.setY(event.getY());
+                view.invalidate();
+                return true;
+        }
+        return false;
     }
 
     public void saveInstanceState(Bundle bundle) {
@@ -104,4 +144,10 @@ public class GameBoard {
             collectable.setShuffle(false);
         }
     }
+
+    public void setCaptureOption(int optionNumber){
+        Log.i("GameBoard", "Set option to " + optionNumber);
+        CaptureOption = optionNumber;
+    }
 }
+

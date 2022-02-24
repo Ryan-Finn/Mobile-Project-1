@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00249E">
@@ -24,7 +23,6 @@
         android:id="@+id/nameInput2"
         android:layout_width="214dp"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
         android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:hint="@string/NameInput2Hint"
         android:textColor="@color/white"
@@ -37,12 +35,11 @@
         android:id="@+id/roundsInput"
         android:layout_width="214dp"
         android:layout_height="52dp"
-        android:layout_marginTop="30dp"
         android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:hint="@string/RoundsInputHint"
+        android:inputType="number"
         android:textColor="@color/white"
         android:textColorHint="#BCAAA4"
-        android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/nameInput2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/nameInput2"
@@ -61,20 +58,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26" />
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <Button
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:background="@color/green"
         android:onClick="onStart"
         android:text="@string/StartButtonText"
         app:layout_constraintEnd_toEndOf="@+id/roundsInput"
         app:layout_constraintStart_toStartOf="@+id/roundsInput"
-        app:layout_constraintTop_toBottomOf="@+id/roundsInput"
-        tools:ignore="TextContrastCheck" />
-
+        app:layout_constraintTop_toBottomOf="@+id/roundsInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-

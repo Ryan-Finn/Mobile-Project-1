@@ -97,4 +97,7 @@ public class Collectable {
     }
 
     public void setShuffle(boolean bool) { this.doShuffle = bool; }
+
+    public boolean getShuffle() { return this.doShuffle; }
+
 }

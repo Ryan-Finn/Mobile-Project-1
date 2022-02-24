@@ -48,7 +48,7 @@ public class GameBoardActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 assert data != null;
                 int captureType = data.getIntExtra(CAPTURED_INT, 0);
-                view.setCaptureType(captureType);
+                view.setCaptureOption(captureType);
                testReturnedCapture(captureType);
             }
         });

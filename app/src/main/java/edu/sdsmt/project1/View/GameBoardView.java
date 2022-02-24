@@ -17,7 +17,7 @@ public class GameBoardView extends View {
     @Override
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
-        return board.onTouchEvent(event);
+        return board.onTouchEvent(this, event);
     }
 
     public GameBoardView(Context context) {
@@ -43,10 +43,6 @@ public class GameBoardView extends View {
         board.draw(canvas);
     }
 
-    public void setCaptureType(int captureType) {
-        capture = captureType;
-    }
-
     public void saveInstanceState(Bundle bundle) {
         board.saveInstanceState(bundle);
     }
@@ -58,4 +54,9 @@ public class GameBoardView extends View {
     public GameBoard getBoard() {
         return board;
     }
+
+    public void setCaptureOption(int optionNumber) {
+        board.setCaptureOption(optionNumber);
+    }
 }
+

@@ -41,6 +41,7 @@ public class GameBoardView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         board.draw(canvas);
+        //capture.draw(canvas);
     }
 
     public void setCaptureType(int captureType) {

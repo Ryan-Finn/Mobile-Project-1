@@ -11,13 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import edu.sdsmt.project1.CaptureSelectionActivity;
+import edu.sdsmt.project1.Control.CaptureSelectionActivity;
 import edu.sdsmt.project1.R;
 import edu.sdsmt.project1.View.GameBoardView;
 
 public class GameBoardActivity extends AppCompatActivity {
     private GameBoardView view;
     public static final String CAPTURED_INT = "edu.sdsmt.project1.RETURN_MESSAGE";
+    public static final String PARAMETERS = "PARAMS";
     private ActivityResultLauncher<Intent> activityLauncher;
 
     @Override
@@ -48,8 +49,7 @@ public class GameBoardActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 assert data != null;
                 int captureType = data.getIntExtra(CAPTURED_INT, 0);
-                view.setCaptureType(captureType);
-               testReturnedCapture(captureType);
+
             }
         });
     }

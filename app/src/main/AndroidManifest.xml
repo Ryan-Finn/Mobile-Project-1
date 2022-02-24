@@ -13,7 +13,10 @@
             android:name=".Control.GameBoardActivity"
             android:exported="false" />
         <activity
-            android:name=".CaptureSelectionActivity"
+            android:name=".Control.CaptureSelectionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EndGameActivity"
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"

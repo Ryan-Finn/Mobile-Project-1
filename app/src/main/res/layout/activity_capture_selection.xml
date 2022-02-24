@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CaptureSelectionActivity">
+    tools:context=".Control.CaptureSelectionActivity">
 
     <ImageView
         android:id="@+id/circleView"

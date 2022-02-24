@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/7555105/Desktop/Mobile Dev/Mobile-Project-1/app/src/main/res/layout/activity_capture_selection.xml" value="0.12447916666666667" />
+        <entry key="..\:/Users/7555105/Desktop/Mobile Dev/Mobile-Project-1/app/src/main/res/layout/activity_end_game.xml" value="0.152" />
+        <entry key="..\:/Users/7555105/Desktop/Mobile Dev/Mobile-Project-1/app/src/main/res/layout/activity_game_board.xml" value="0.12447916666666667" />
         <entry key="..\:/Users/Finnster/AndroidStudioProjects/Mobile-Project-1/app/src/main/res/layout/activity_game_board.xml" value="0.259375" />
         <entry key="..\:/Users/Finnster/AndroidStudioProjects/Mobile-Project-1/app/src/main/res/layout/activity_main.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/Finnster/AndroidStudioProjects/Mobile-Project-1/app/src/main/res/layout/activity_welcome.xml" value="0.2259963768115942" />

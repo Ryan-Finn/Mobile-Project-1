@@ -1,4 +1,4 @@
-package edu.sdsmt.project1;
+package edu.sdsmt.project1.Control;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import edu.sdsmt.project1.Control.GameBoardActivity;
+import edu.sdsmt.project1.R;
 
 public class CaptureSelectionActivity extends AppCompatActivity {
 

@@ -10,14 +10,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import edu.sdsmt.project1.Control.CaptureSelectionActivity;
+import edu.sdsmt.project1.Model.Player;
 import edu.sdsmt.project1.R;
 import edu.sdsmt.project1.View.GameBoardView;
 import edu.sdsmt.project1.WelcomeActivity;
 
 public class GameBoardActivity extends AppCompatActivity {
     private GameBoardView view;
+    private Player player1, player2;
     public static final String CAPTURED_INT = "edu.sdsmt.project1.RETURN_MESSAGE";
     public static final String PARAMETERS = "PARAMS";
     private ActivityResultLauncher<Intent> activityLauncher;
@@ -42,15 +45,25 @@ public class GameBoardActivity extends AppCompatActivity {
 
         //get player names and no of rounds from prev
         Intent intent = getIntent();
-        String player1Name = intent.getStringExtra(WelcomeActivity.PLAYER1NAME_MESSAGE);
-        String player2Name = intent.getStringExtra(WelcomeActivity.PLAYER2NAME_MESSAGE);
-        String rounds = intent.getStringExtra(WelcomeActivity.ROUNDS_MESSAGE);
+        String name1 = intent.getStringExtra(WelcomeActivity.PLAYER1NAME_MESSAGE);
+        String name2 = intent.getStringExtra(WelcomeActivity.PLAYER2NAME_MESSAGE);
+        String r = intent.getStringExtra(WelcomeActivity.ROUNDS_MESSAGE);
 
-        //testing if it passing info works
-        Log.i("P1", player1Name);
-        Log.i("P2", player2Name);
-        Log.i("r", rounds);
+        if (name1.isEmpty()) {
+            name1 = getString(R.string.Name1);
+        }
+        if (name2.isEmpty()) {
+            name2 = getString(R.string.Name2);
+        }
 
+        player1 = new Player(name1, 1);
+        player2 = new Player(name2, 2);
+
+        ((TextView)findViewById(R.id.player1Name)).setText(name1);
+        ((TextView)findViewById(R.id.player1Score)).setText("0");
+        ((TextView)findViewById(R.id.player2Name)).setText(name2);
+        ((TextView)findViewById(R.id.player2Score)).setText("0");
+        ((TextView)findViewById(R.id.rounds)).setText(r);
 
         //any target
         ActivityResultContracts.StartActivityForResult contract =

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+
 import java.util.Random;
 
 public class Collectable {
@@ -100,4 +103,10 @@ public class Collectable {
 
     public boolean getShuffle() { return this.doShuffle; }
 
+    public float getRadius() {return (float) this.width / 11;}
+
+    public void debugDraw(boolean condition) {
+        int c = condition ? Color.GREEN : Color.BLUE;
+
+    }
 }

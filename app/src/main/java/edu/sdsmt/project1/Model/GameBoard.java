@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class GameBoard {
     private static final Random random = new Random();
-    public final ArrayList<Collectable> collectables = new ArrayList<>();
+    private final ArrayList<Collectable> collectables = new ArrayList<>();
     private final static String LOCATIONS = "GameBoard.locations";
     private final static String IDS = "GameBoard.ids";
     final static float SCALE_IN_VIEW = 1.0f;
@@ -82,7 +82,8 @@ public class GameBoard {
                 if (CaptureOption == 0)
                     capture = new CircleCapture();
                 else if (CaptureOption == 1)
-                    capture = new SquareCapture();
+                    return false;
+                    //capture = new SquareCapture();
                 else if (CaptureOption == 2)
                     capture = new LineCapture();
 
@@ -94,6 +95,10 @@ public class GameBoard {
             case MotionEvent.ACTION_UP:
 
             case MotionEvent.ACTION_CANCEL:
+                ArrayList<Collectable> collected = capture.getContainedCollectables(view, collectables);
+                for (Collectable c : collected) {
+                    collectables.remove(c);
+                }
                 capture = null;
                 view.invalidate();
                 return true;

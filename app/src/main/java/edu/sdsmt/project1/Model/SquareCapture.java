@@ -7,6 +7,9 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class SquareCapture extends CaptureObject {
+    private final float width = 200;
+    private final float height = 200;
+
     @Override
     public ArrayList<Collectable> getContainedCollectables(View view, ArrayList<Collectable> list) {
         // To do: Add capture rules and return the list of collected objects within list
@@ -16,7 +19,7 @@ public class SquareCapture extends CaptureObject {
     @Override
     public void draw(Canvas canvas, Paint p) {
         // Draw a square on the screen
-        canvas.drawRect(x-100,y-100,x+100,y+100,p);
+        canvas.drawRect(x - width/2,y - height/2,x + width/2,y + height/2, p);
     }
 }
 

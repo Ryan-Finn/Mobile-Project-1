@@ -1,10 +1,12 @@
-package edu.sdsmt.project1;
+package edu.sdsmt.project1.Control;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import edu.sdsmt.project1.R;
 
 public class EndGameActivity extends AppCompatActivity {
 
@@ -20,8 +22,8 @@ public class EndGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
 
-        player1 = findViewById(R.id.Player1Score);
-        player2 = findViewById(R.id.Player2Score);
+        player1 = findViewById(R.id.player1Score);
+        player2 = findViewById(R.id.player2Score);
         winner = findViewById(R.id.winnerTextView);
 
         // Get the message from the intent

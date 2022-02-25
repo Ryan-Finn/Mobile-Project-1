@@ -14,6 +14,7 @@ import android.view.View;
 import edu.sdsmt.project1.Control.CaptureSelectionActivity;
 import edu.sdsmt.project1.R;
 import edu.sdsmt.project1.View.GameBoardView;
+import edu.sdsmt.project1.WelcomeActivity;
 
 public class GameBoardActivity extends AppCompatActivity {
     private GameBoardView view;
@@ -39,6 +40,18 @@ public class GameBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_board);
         view = this.findViewById(R.id.gameBoardView);
 
+        //get player names and no of rounds from prev
+        Intent intent = getIntent();
+        String player1Name = intent.getStringExtra(WelcomeActivity.PLAYER1NAME_MESSAGE);
+        String player2Name = intent.getStringExtra(WelcomeActivity.PLAYER2NAME_MESSAGE);
+        String rounds = intent.getStringExtra(WelcomeActivity.ROUNDS_MESSAGE);
+
+        //testing if it passing info works
+        Log.i("P1", player1Name);
+        Log.i("P2", player2Name);
+        Log.i("r", rounds);
+
+
         //any target
         ActivityResultContracts.StartActivityForResult contract =
                 new ActivityResultContracts.StartActivityForResult();
@@ -50,30 +63,10 @@ public class GameBoardActivity extends AppCompatActivity {
                 assert data != null;
                 int captureType = data.getIntExtra(CAPTURED_INT, 0);
                 view.setCaptureOption(captureType);
-               testReturnedCapture(captureType);
-
             }
         });
     }
 
-    /*For testing that captureSelectionActivity returns correct option */
-    public void testReturnedCapture(int type)
-    {
-        String option = "";
-        switch (type) {
-            case 0:
-                option = "Circle";
-                break;
-            case 1:
-                option = "Rect";
-                break;
-            case 2:
-                option = "Line";
-                break;
-        }
-
-        Log.i("Returned Option", option);
-    }
 
     public void onCaptureOptionsClick(View view) {
         Intent switchActivityIntent = new Intent(this, CaptureSelectionActivity.class);

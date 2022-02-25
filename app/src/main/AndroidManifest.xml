@@ -16,7 +16,7 @@
             android:name=".Control.CaptureSelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".EndGameActivity"
+            android:name=".Control.EndGameActivity"
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"

@@ -72,6 +72,7 @@ public class GameBoard {
     }
 
     private boolean onReleased() {
+
         return true;
     }
 
@@ -92,6 +93,14 @@ public class GameBoard {
                 return true;
 
             case MotionEvent.ACTION_UP:
+               /*  switch(currentPlayer.name) {
+                     case Player1.name:
+                         currentPlayer = Player2.name;
+                         break;
+                     case Player2.name:
+                         currentPlayer = Player1.name;
+                         break;
+                 }*/
 
             case MotionEvent.ACTION_CANCEL:
                 capture = null;
@@ -148,6 +157,7 @@ public class GameBoard {
     public void setCaptureOption(int optionNumber){
         Log.i("GameBoard", "Set option to " + optionNumber);
         CaptureOption = optionNumber;
+
     }
 }
 

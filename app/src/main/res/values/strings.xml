@@ -2,7 +2,10 @@
     <string name="app_name">Project 1</string>
     <string name="NameInput1Hint">Player 1 Name</string>
     <string name="NameInput2Hint">Player 2 Name</string>
+    <string name="Name1">Player 1</string>
+    <string name="Name2">Player 2</string>
     <string name="RoundsInputHint">Number of Rounds (0-inf)</string>
+    <string name="Rounds">Rounds</string>
     <string name="WelcomeText">Project 1 Mobile Computing (Placeholder)</string>
     <string name="StartButtonText">START GAME</string>
     <string name="circle_description">Circle_Capture</string>

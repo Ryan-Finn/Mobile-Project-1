@@ -14,6 +14,7 @@ import java.util.Random;
 public class GameBoard {
     private static final Random random = new Random();
     private final ArrayList<Collectable> collectables = new ArrayList<>();
+    private ArrayList<Player> players;
     private final static String LOCATIONS = "GameBoard.locations";
     private final static String IDS = "GameBoard.ids";
     final static float SCALE_IN_VIEW = 1.0f;
@@ -22,12 +23,15 @@ public class GameBoard {
     private final Paint capturePaint;
     private CaptureObject capture = null;
     private int CaptureOption = 0;
+    private Player currentPlayer;
+    private int rounds;
 
     public GameBoard(View v, Context context) {
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(0xffcccccc);
 
+        players = new ArrayList<>();
         outlinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         outlinePaint.setStyle(Paint.Style.STROKE);
         outlinePaint.setColor(Color.BLUE);
@@ -41,6 +45,7 @@ public class GameBoard {
             Collectable collectable = new Collectable(context, edu.sdsmt.project1.R.drawable.collectable);
             collectables.add(collectable);
         }
+
     }
 
     public void draw(Canvas canvas) {
@@ -77,8 +82,11 @@ public class GameBoard {
     }
 
     public boolean onTouchEvent(View view, MotionEvent event) {
-        switch (event.getActionMasked()) {
+        Log.i(" listener", "reached onTouch");
 
+       // if(rounds <= 0)
+         //   return true;
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 if (CaptureOption == 0)
                     capture = new CircleCapture();
@@ -94,21 +102,28 @@ public class GameBoard {
                 return true;
 
             case MotionEvent.ACTION_UP:
-               /*  switch(currentPlayer.name) {
-                     case Player1.name:
-                         currentPlayer = Player2.name;
-                         break;
-                     case Player2.name:
-                         currentPlayer = Player1.name;
-                         break;
-                 }*/
 
             case MotionEvent.ACTION_CANCEL:
+                Log.i("CurrentPlayer", "Reached cancel");
                 ArrayList<Collectable> collected = capture.getContainedCollectables(view, collectables);
                 for (Collectable c : collected) {
                     collectables.remove(c);
                 }
                 capture = null;
+                Log.i("CurrentPlayer", String.valueOf(currentPlayer.getId()));
+
+                switch(currentPlayer.getId()) {
+                    case 0:
+                        players.get(0).incScore(collected.size());
+                        currentPlayer = players.get(1);
+                        break;
+                    case 1:
+                        players.get(1).incScore(collected.size());
+                        currentPlayer = players.get(0);
+                        rounds--;
+                        break;
+                }
+                Log.i("CurrentPlayer", String.valueOf(currentPlayer.getId()));
                 view.invalidate();
                 return true;
 
@@ -162,7 +177,47 @@ public class GameBoard {
     public void setCaptureOption(int optionNumber){
         Log.i("GameBoard", "Set option to " + optionNumber);
         CaptureOption = optionNumber;
+    }
 
+    public void setDefaultPlayer()
+    {
+        if(!players.isEmpty())
+            currentPlayer = players.get(0);
+    }
+
+    public void addPlayer(String name, int id) {
+        players.add(new Player(name, id));
+    }
+
+    public void setRounds(int r) {
+        rounds = r;
+    }
+
+    public String getRounds() {
+        return String.valueOf(rounds);
+    }
+
+    public String getPlayer1Score() {
+        return String.valueOf(players.get(0).getScore());
+    }
+
+    public int getCurrentPlayerId() {
+        return currentPlayer.getId();
+    }
+
+    public boolean isEndGame(){return rounds <= 0;}
+
+
+
+    public String getPlayer2Score() {
+        return String.valueOf(players.get(1).getScore());
+    }
+
+    public String getPlayer2Name() {
+        return players.get(1).getName();
+    }
+    public String getPlayer1Name() {
+        return players.get(0).getName();
     }
 }
 

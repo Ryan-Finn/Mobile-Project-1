@@ -59,5 +59,42 @@ public class GameBoardView extends View {
     public void setCaptureOption(int optionNumber) {
         board.setCaptureOption(optionNumber);
     }
+
+    public void addPlayer(String name, int id) {
+        board.addPlayer(name, id);
+    }
+
+    public void setRounds(int r) {
+        board.setRounds(r);
+    }
+
+    public String getRounds(){
+        return board.getRounds();
+    }
+
+    public String getPlayer2Score() {
+        return board.getPlayer2Score();
+    }
+
+    public String getPlayer1Score() {
+        return board.getPlayer1Score();
+    }
+
+    public int getCurrentPlayerId() {
+        return board.getCurrentPlayerId();
+    }
+
+    public boolean isEndRound(){return board.isEndGame();}
+
+    public void setDefaultPlayer() {
+        board.setDefaultPlayer();
+    }
+
+    public String getPlayer1Name() {
+        return board.getPlayer1Name();
+    }
+    public String getPlayer2Name() {
+        return board.getPlayer2Name();
+    }
 }
 

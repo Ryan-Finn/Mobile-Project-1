@@ -2,40 +2,59 @@ package edu.sdsmt.project1.Model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.View;
-import java.lang.Integer;
-
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class LineCapture extends CaptureObject {
     private final float strokeSize = 25;
 
+    public float distToLine(float startX, float startY, float cx, float cy) {
+        float dx = x - startX;
+        float dy = y - startY;
+        float closestX, closestY, t;
+
+        if ((dx == 0) && (dy == 0)) {
+            dx = cx - startX;
+            dy = cy - startY;
+            return (float) Math.sqrt(dx * dx + dy * dy);
+        }
+
+        t = ((cx - startX) * dx + (cy - startY) * dy) / (dx * dx + dy * dy);
+
+        if (t < 0) {
+            closestX = startX;
+            closestY = startY;
+            dx = cx - closestX;
+            dy = cy - closestY;
+        } else if (t > 1) {
+            closestX = x;
+            closestY = y;
+            dx = cx - closestX;
+            dy = cy - closestY;
+        } else {
+            closestX = startX + t * dx;
+            closestY = startY + t * dy;
+            dx = cx - closestX;
+            dy = cy - closestY;
+        }
+
+        return (float) Math.sqrt(dx * dx + dy * dy);
+    }
+
     @Override
-    public ArrayList<Collectable> getContainedCollectables(View view, ArrayList<Collectable> list) {
+    public ArrayList<Collectable> getContainedCollectables(float viewWidth, float viewHeight,
+                                                           ArrayList<Collectable> list) {
         ArrayList<Collectable> contained = new ArrayList<>();
 
-        float startX = (float) view.getWidth() / 2;
+        float startX = viewWidth / 2;
         float startY = 0;
-        float epsilon, distance;
 
         for (Collectable obj : list) {
-            // Line equation
-            float objX = obj.getX() * view.getWidth();
-            float objY = obj.getY() * view.getHeight();
-            epsilon = strokeSize;
+            float objX = obj.getX() * viewWidth;
+            float objY = obj.getY() * viewHeight;
+            float dist = this.distToLine(startX, startY, objX, objY);
 
-            // Dist from collectable center to the line
-            distance =
-                    Math.abs((x - startX) * (startY - objY) - (startX - objX) * (y - startY)) /
-                            (float) Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2));
-
-            if (distance < epsilon) {
-                // Object is within the bounds of the line and not just in the direction
-                if (objX > Math.min(x, startX) && objX < Math.max(x, startX)) {
-                    contained.add(obj);
-                }
+            if (dist < strokeSize / 2 + obj.getRadius()) {
+                contained.add(obj);
             }
         }
         return contained;
@@ -45,7 +64,7 @@ public class LineCapture extends CaptureObject {
     public void draw(Canvas canvas, Paint p) {
         // Draw a line on the screen
         p.setStrokeWidth(strokeSize);
-        canvas.drawLine((float) canvas.getWidth() / 2,0,x,y,p);
+        canvas.drawLine((float) canvas.getWidth() / 2, 0, x, y,p);
     }
 }
 

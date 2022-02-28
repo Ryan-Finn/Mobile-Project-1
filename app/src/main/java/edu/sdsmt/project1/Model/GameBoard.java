@@ -68,6 +68,7 @@ public class GameBoard {
         }
 
         if (capture != null) {
+            capture.debug(canvas, collectables);
             capture.draw(canvas, capturePaint);
         }
     }
@@ -83,6 +84,7 @@ public class GameBoard {
 
     public boolean onTouchEvent(View view, MotionEvent event) {
         Log.i(" listener", "reached onTouch");
+        int id = event.getPointerId(event.getActionIndex());
 
        // if(rounds <= 0)
          //   return true;
@@ -91,8 +93,7 @@ public class GameBoard {
                 if (CaptureOption == 0)
                     capture = new CircleCapture();
                 else if (CaptureOption == 1)
-                    return false;
-                    //capture = new SquareCapture();
+                    capture = new SquareCapture();
                 else if (CaptureOption == 2)
                     capture = new LineCapture();
 
@@ -105,7 +106,7 @@ public class GameBoard {
 
             case MotionEvent.ACTION_CANCEL:
                 Log.i("CurrentPlayer", "Reached cancel");
-                ArrayList<Collectable> collected = capture.getContainedCollectables(view, collectables);
+                ArrayList<Collectable> collected = capture.getContainedCollectables(view.getWidth(), view.getHeight(), collectables);
                 for (Collectable c : collected) {
                     collectables.remove(c);
                 }

@@ -104,9 +104,4 @@ public class Collectable {
     public boolean getShuffle() { return this.doShuffle; }
 
     public float getRadius() {return (float) this.width / 11;}
-
-    public void debugDraw(boolean condition) {
-        int c = condition ? Color.GREEN : Color.BLUE;
-
-    }
 }

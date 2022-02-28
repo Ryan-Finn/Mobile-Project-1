@@ -21,7 +21,7 @@ public abstract class CaptureObject {
      *
      * @return Collectables contained within the capture object.
      */
-    public abstract ArrayList<Collectable> getContainedCollectables(View view,
+    public abstract ArrayList<Collectable> getContainedCollectables(float viewWidth, float viewHeight,
                                                                     ArrayList<Collectable> list);
 
     public abstract void draw(Canvas canvas, Paint p);
@@ -33,5 +33,25 @@ public abstract class CaptureObject {
     public void setX(float x) { this.x = x; }
 
     public void setY(float y) { this.y = y; }
+
+    public void debug(Canvas canvas, ArrayList<Collectable> list) {
+        float x, y;
+
+        Paint p = new Paint();
+
+        ArrayList<Collectable> collected = getContainedCollectables(canvas.getWidth(), canvas.getHeight(), list);
+
+        for (Collectable obj : list) {
+            x = obj.getX() * canvas.getWidth();
+            y = obj.getY() * canvas.getHeight();
+            if (!collected.contains(obj))
+                p.setColor(Color.BLUE);
+            else
+                p.setColor(Color.GREEN);
+            p.setAlpha(40);
+            canvas.drawCircle(x, y, obj.getRadius(), p);
+        }
+    }
+
 }
 

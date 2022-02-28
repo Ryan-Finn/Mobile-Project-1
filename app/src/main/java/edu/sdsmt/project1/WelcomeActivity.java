@@ -1,15 +1,11 @@
 package edu.sdsmt.project1;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 
 import edu.sdsmt.project1.Control.GameBoardActivity;

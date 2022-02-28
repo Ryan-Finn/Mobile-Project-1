@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Player2ScoreString"
-        app:layout_constraintEnd_toStartOf="@+id/backButton"
+        app:layout_constraintEnd_toStartOf="@+id/winnerTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player1Score"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -34,14 +34,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/player2Score"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/player2Score"
-        app:layout_constraintTop_toBottomOf="@+id/winnerTextView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

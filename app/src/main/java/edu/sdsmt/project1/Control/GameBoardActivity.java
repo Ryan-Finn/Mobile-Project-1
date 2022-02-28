@@ -112,15 +112,16 @@ public class GameBoardActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(this, EndGameActivity.class);
             intent.putExtra(EndGameActivity.PLAYER1_MESSAGE, view.getPlayer1Name()
-                    + "\n" + view.getPlayer1Score());
+                    + "'s Score\n" + view.getPlayer1Score());
             intent.putExtra(EndGameActivity.PLAYER2_MESSAGE, view.getPlayer2Name()
-                    + "\n" + view.getPlayer2Score());
+                    + "'s Score\n" + view.getPlayer2Score());
             String winner = view.getPlayer2Name() ;
             if(Integer.parseInt(view.getPlayer1Score()) > Integer.parseInt(view.getPlayer2Score()))
-                winner = view.getPlayer1Name();
+                winner = "WINNER\n" + view.getPlayer1Name();
 
             intent.putExtra(EndGameActivity.WINNER_MESSAGE, winner);
             startActivity(intent);
+            finish();
         }
     }
 

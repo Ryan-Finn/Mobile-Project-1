@@ -29,6 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void onStart(View view) {
         Intent intent = new Intent(this, GameBoardActivity.class);
+
         intent.putExtra(PLAYER1NAME_MESSAGE, player1.getText().toString());
         intent.putExtra(PLAYER2NAME_MESSAGE, player2.getText().toString());
         intent.putExtra(ROUNDS_MESSAGE, rounds.getText().toString());

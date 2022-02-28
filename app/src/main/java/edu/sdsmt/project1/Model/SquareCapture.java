@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class SquareCapture extends CaptureObject {
     private final float size = 200;
+    private float scale = 1f;
 
     private boolean collides(Collectable obj, float viewWidth, float viewHeight) {
         float objX = obj.getX() * viewWidth;
@@ -30,12 +31,11 @@ public class SquareCapture extends CaptureObject {
     }
 
     @Override
-    public ArrayList<Collectable> getContainedCollectables(float viewWidth, float viewHeight,
-                                                           ArrayList<Collectable> list) {
+    public ArrayList<Collectable> getContainedCollectables(ArrayList<Collectable> list) {
         ArrayList<Collectable> contained = new ArrayList<>();
 
         for (Collectable obj : list) {
-            if (collides(obj, viewWidth, viewHeight)) {
+            if (collides(obj, width, height)) {
                 contained.add(obj);
             }
         }
@@ -48,5 +48,11 @@ public class SquareCapture extends CaptureObject {
         // Draw a square on the screen
         canvas.drawRect(x - size/2,y - size/2,x + size/2,y + size/2, p);
     }
+
+    @Override
+    public float getScale() { return scale; }
+
+    @Override
+    public void setScale(float scale) { this.scale = scale; }
 }
 

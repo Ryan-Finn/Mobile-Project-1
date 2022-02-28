@@ -4,21 +4,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-
-import edu.sdsmt.project1.Control.CaptureSelectionActivity;
-import edu.sdsmt.project1.Model.Player;
 import edu.sdsmt.project1.R;
 import edu.sdsmt.project1.View.GameBoardView;
 import edu.sdsmt.project1.WelcomeActivity;
@@ -31,7 +24,7 @@ public class GameBoardActivity extends AppCompatActivity {
     private TextView player1Score;
     private TextView player2Score;
     private TextView rounds;
-    private ActivityResultLauncher<Intent> activityLauncher;
+    private ActivityResultLauncher<Intent> captureResultLauncher;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle bundle) {
@@ -45,12 +38,12 @@ public class GameBoardActivity extends AppCompatActivity {
         view.loadInstanceState(bundle);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_board);
         view = this.findViewById(R.id.gameBoardView);
-
 
         //get player names and no of rounds from prev
         Intent intent = getIntent();
@@ -58,12 +51,14 @@ public class GameBoardActivity extends AppCompatActivity {
         String name2 = intent.getStringExtra(WelcomeActivity.PLAYER2NAME_MESSAGE);
         String r = intent.getStringExtra(WelcomeActivity.ROUNDS_MESSAGE);
 
-
         if (name1.isEmpty()) {
             name1 = getString(R.string.Name1);
         }
         if (name2.isEmpty()) {
             name2 = getString(R.string.Name2);
+        }
+        if (r.isEmpty()) {
+            r = "5";
         }
 
         view.addPlayer(name1,0);
@@ -84,7 +79,7 @@ public class GameBoardActivity extends AppCompatActivity {
         player1Name.setTextColor(Color.parseColor("#FF0000"));
 
         Log.i("CurrentPlayer", "Reached gameboard");
-       view.setOnTouchListener((view, motionEvent) -> {
+        view.setOnTouchListener((view, motionEvent) -> {
             view.onTouchEvent(motionEvent);
             updateGUI();
             isEndGame();
@@ -94,21 +89,18 @@ public class GameBoardActivity extends AppCompatActivity {
         //any target
         ActivityResultContracts.StartActivityForResult contract =
                 new ActivityResultContracts.StartActivityForResult();
-        activityLauncher = registerForActivityResult(contract, (result) ->
-        {
+        captureResultLauncher = registerForActivityResult(contract, (result) -> {
             int resultCode = result.getResultCode();
             if (resultCode == Activity.RESULT_OK) {
                 Intent data = result.getData();
                 assert data != null;
-                int captureType = data.getIntExtra(CAPTURED_INT, 0);
-                view.setCaptureOption(captureType);
-              //  updateGUI();
+                view.setCapture(data.getIntExtra(CAPTURED_INT, 0));
             }
         });
     }
 
     private void isEndGame() {
-        if(view.isEndRound())
+        if(view.isEndGame())
         {
             Intent intent = new Intent(this, EndGameActivity.class);
             intent.putExtra(EndGameActivity.PLAYER1_MESSAGE, view.getPlayer1Name()
@@ -139,16 +131,15 @@ public class GameBoardActivity extends AppCompatActivity {
         }
 
 
-       player1Score.setText(view.getPlayer1Score());
+        player1Score.setText(view.getPlayer1Score());
         player2Score.setText(view.getPlayer2Score());
         rounds.setText(view.getRounds());
     }
 
 
     public void onCaptureOptionsClick(View view) {
-       // updateGUI();
         Intent switchActivityIntent = new Intent(this, CaptureSelectionActivity.class);
-        activityLauncher.launch(switchActivityIntent);
+        captureResultLauncher.launch(switchActivityIntent);
     }
 
 }

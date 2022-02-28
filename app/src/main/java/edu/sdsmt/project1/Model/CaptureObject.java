@@ -3,14 +3,14 @@ package edu.sdsmt.project1.Model;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 
-public abstract class CaptureObject {
+public class CaptureObject {
     protected float x = 0;
     protected float y = 0;
+    protected float width;
+    protected float height;
 
     /**
      * Gets collectables that are contained within a capture object from the GameBoardActivity's
@@ -21,35 +21,39 @@ public abstract class CaptureObject {
      *
      * @return Collectables contained within the capture object.
      */
-    public abstract ArrayList<Collectable> getContainedCollectables(float viewWidth, float viewHeight,
-                                                                    ArrayList<Collectable> list);
+    public ArrayList<Collectable> getContainedCollectables(ArrayList<Collectable> list) {
+        return new ArrayList<>();
+    }
 
-    public abstract void draw(Canvas canvas, Paint p);
+    public void draw(Canvas canvas, Paint p) {}
 
     public float getX() { return x; }
 
     public float getY() { return y; }
 
+    public float getScale() { return 0; }
+
+    public float getAngle() { return 0; }
+
     public void setX(float x) { this.x = x; }
 
     public void setY(float y) { this.y = y; }
 
+    public void setScale(float scale) {}
+
+    public void setAngle(float angle) {}
+
     public void debug(Canvas canvas, ArrayList<Collectable> list) {
-        float x, y;
-
         Paint p = new Paint();
-
-        ArrayList<Collectable> collected = getContainedCollectables(canvas.getWidth(), canvas.getHeight(), list);
+        ArrayList<Collectable> collected = getContainedCollectables(list);
 
         for (Collectable obj : list) {
-            x = obj.getX() * canvas.getWidth();
-            y = obj.getY() * canvas.getHeight();
             if (!collected.contains(obj))
                 p.setColor(Color.BLUE);
             else
                 p.setColor(Color.GREEN);
             p.setAlpha(40);
-            canvas.drawCircle(x, y, obj.getRadius(), p);
+            canvas.drawCircle(obj.getX(), obj.getY(), obj.getRadius(), p);
         }
     }
 

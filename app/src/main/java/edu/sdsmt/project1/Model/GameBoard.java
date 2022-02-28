@@ -1,159 +1,68 @@
 package edu.sdsmt.project1.Model;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameBoard {
-    private static final Random random = new Random();
     private final ArrayList<Collectable> collectables = new ArrayList<>();
-    private ArrayList<Player> players;
+    private final ArrayList<Player> players = new ArrayList<>();
+    private final static String REL_LOCATIONS = "GameBoard.relLocations";
     private final static String LOCATIONS = "GameBoard.locations";
     private final static String IDS = "GameBoard.ids";
-    final static float SCALE_IN_VIEW = 1.0f;
-    private final Paint fillPaint;
-    private final Paint outlinePaint;
-    private final Paint capturePaint;
-    private CaptureObject capture = null;
-    private int CaptureOption = 0;
     private Player currentPlayer;
     private int rounds;
 
-    public GameBoard(View v, Context context) {
-
-        fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        fillPaint.setColor(0xffcccccc);
-
-        players = new ArrayList<>();
-        outlinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        outlinePaint.setStyle(Paint.Style.STROKE);
-        outlinePaint.setColor(Color.BLUE);
-        outlinePaint.setStrokeWidth(5.0f);
-
-        capturePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        capturePaint.setColor(Color.RED);
-        capturePaint.setAlpha(100);
-
-        for (int i = 0; i < 20; i++) {
-            Collectable collectable = new Collectable(context, edu.sdsmt.project1.R.drawable.collectable);
+    public GameBoard(Context context) {
+        for (int i = 0; i < 21; i++) {
+            Collectable collectable = new Collectable(context, edu.sdsmt.project1.R.drawable.collectable, 0.2f);
             collectables.add(collectable);
         }
-
     }
 
-    public void draw(Canvas canvas) {
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
+    public ArrayList<Collectable> getCollectables() {
+        return collectables;
+    }
 
-        int canvasX = (int) (width * (1.0f - SCALE_IN_VIEW) / 2);
-        int canvasY = (int) (height * (1.0f - SCALE_IN_VIEW) / 2);
-
-        width = (int)(width * SCALE_IN_VIEW);
-        height = (int)(height * SCALE_IN_VIEW);
-
-        canvas.drawRect(canvasX, canvasY, width, height, fillPaint);
-        canvas.drawRect(canvasX, canvasY, width, height, outlinePaint);
-
-        for(Collectable collectable : collectables) {
-            collectable.shuffle(canvas, canvasX, canvasY, 0.2f, random);
-            collectable.setShuffle(false);
-            collectable.draw(canvas, canvasX, canvasY, 0.2f);
+    public void capture(CaptureObject capture) {
+        ArrayList<Collectable> collected = capture.getContainedCollectables(collectables);
+        for (Collectable c : collected) {
+            collectables.remove(c);
         }
-
-        if (capture != null) {
-            capture.debug(canvas, collectables);
-            capture.draw(canvas, capturePaint);
+        switch(currentPlayer.getId()) {
+            case 0:
+                players.get(0).incScore(collected.size());
+                currentPlayer = players.get(1);
+                break;
+            case 1:
+                players.get(1).incScore(collected.size());
+                currentPlayer = players.get(0);
+                rounds--;
+                break;
         }
-    }
-
-    private boolean onTouched(float x, float y) {
-        return true;
-    }
-
-    private boolean onReleased() {
-
-        return true;
-    }
-
-    public boolean onTouchEvent(View view, MotionEvent event) {
-        Log.i(" listener", "reached onTouch");
-        int id = event.getPointerId(event.getActionIndex());
-
-       // if(rounds <= 0)
-         //   return true;
-        switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                if (CaptureOption == 0)
-                    capture = new CircleCapture();
-                else if (CaptureOption == 1)
-                    capture = new SquareCapture();
-                else if (CaptureOption == 2)
-                    capture = new LineCapture();
-
-                capture.setX(event.getX());
-                capture.setY(event.getY());
-                view.invalidate();
-                return true;
-
-            case MotionEvent.ACTION_UP:
-
-            case MotionEvent.ACTION_CANCEL:
-                Log.i("CurrentPlayer", "Reached cancel");
-                ArrayList<Collectable> collected = capture.getContainedCollectables(view.getWidth(), view.getHeight(), collectables);
-                for (Collectable c : collected) {
-                    collectables.remove(c);
-                }
-                capture = null;
-                Log.i("CurrentPlayer", String.valueOf(currentPlayer.getId()));
-
-                switch(currentPlayer.getId()) {
-                    case 0:
-                        players.get(0).incScore(collected.size());
-                        currentPlayer = players.get(1);
-                        break;
-                    case 1:
-                        players.get(1).incScore(collected.size());
-                        currentPlayer = players.get(0);
-                        rounds--;
-                        break;
-                }
-                Log.i("CurrentPlayer", String.valueOf(currentPlayer.getId()));
-                view.invalidate();
-                return true;
-
-            case MotionEvent.ACTION_MOVE:
-                // If we are dragging, move the piece
-                capture.setX(event.getX());
-                capture.setY(event.getY());
-                view.invalidate();
-                return true;
-        }
-        return false;
     }
 
     public void saveInstanceState(Bundle bundle) {
+        float [] relLocations = new float[collectables.size() * 2];
         float [] locations = new float[collectables.size() * 2];
         int [] ids = new int[collectables.size()];
 
         for (int i = 0; i < collectables.size(); i++) {
             Collectable collectable = collectables.get(i);
+            relLocations[i * 2] = collectable.getRelX();
+            relLocations[i * 2 + 1] = collectable.getRelY();
             locations[i * 2] = collectable.getX();
             locations[i * 2 + 1] = collectable.getY();
             ids[i] = collectable.getId();
         }
 
+        bundle.putFloatArray(REL_LOCATIONS, relLocations);
         bundle.putFloatArray(LOCATIONS, locations);
         bundle.putIntArray(IDS,  ids);
     }
 
     public void loadInstanceState(Bundle bundle) {
+        float [] relLocations = bundle.getFloatArray(REL_LOCATIONS);
         float [] locations = bundle.getFloatArray(LOCATIONS);
         int [] ids = bundle.getIntArray(IDS);
 
@@ -169,56 +78,35 @@ public class GameBoard {
 
         for (int i = 0; i < collectables.size(); i++) {
             Collectable collectable = collectables.get(i);
+            collectable.setRelX(relLocations[i*2]);
+            collectable.setRelY(relLocations[i*2+1]);
             collectable.setX(locations[i*2]);
             collectable.setY(locations[i*2+1]);
             collectable.setShuffle(false);
         }
     }
 
-    public void setCaptureOption(int optionNumber){
-        Log.i("GameBoard", "Set option to " + optionNumber);
-        CaptureOption = optionNumber;
-    }
+    public boolean isEndGame(){ return rounds <= 0 || collectables.isEmpty(); }
 
-    public void setDefaultPlayer()
-    {
-        if(!players.isEmpty())
+    public void addPlayer(String name, int id) { players.add(new Player(name, id)); }
+
+    public void setDefaultPlayer() {
+        if (!players.isEmpty())
             currentPlayer = players.get(0);
     }
 
-    public void addPlayer(String name, int id) {
-        players.add(new Player(name, id));
-    }
+    public void setRounds(int r) { rounds = r; }
 
-    public void setRounds(int r) {
-        rounds = r;
-    }
+    public String getRounds() { return String.valueOf(rounds); }
 
-    public String getRounds() {
-        return String.valueOf(rounds);
-    }
+    public int getCurrentPlayerId() { return currentPlayer.getId(); }
 
-    public String getPlayer1Score() {
-        return String.valueOf(players.get(0).getScore());
-    }
+    public String getPlayer1Score() { return String.valueOf(players.get(0).getScore()); }
 
-    public int getCurrentPlayerId() {
-        return currentPlayer.getId();
-    }
+    public String getPlayer2Score() { return String.valueOf(players.get(1).getScore()); }
 
-    public boolean isEndGame(){return rounds <= 0;}
+    public String getPlayer1Name() { return players.get(0).getName(); }
 
-
-
-    public String getPlayer2Score() {
-        return String.valueOf(players.get(1).getScore());
-    }
-
-    public String getPlayer2Name() {
-        return players.get(1).getName();
-    }
-    public String getPlayer1Name() {
-        return players.get(0).getName();
-    }
+    public String getPlayer2Name() { return players.get(1).getName(); }
 }
 

@@ -1,11 +1,15 @@
 package edu.sdsmt.project1;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 
 import edu.sdsmt.project1.Control.GameBoardActivity;
@@ -34,5 +38,13 @@ public class WelcomeActivity extends AppCompatActivity {
         intent.putExtra(PLAYER2NAME_MESSAGE, player2.getText().toString());
         intent.putExtra(ROUNDS_MESSAGE, rounds.getText().toString());
         startActivity(intent);
+    }
+
+    public void onHowToPlay(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(WelcomeActivity.this);
+        builder.setTitle(R.string.HowToPlayTitle);
+        builder.setMessage(R.string.HowToPlayMessage);
+        builder.setPositiveButton(android.R.string.ok, null);
+        builder.show();
     }
 }

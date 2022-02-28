@@ -64,10 +64,20 @@
         android:id="@+id/startGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/green"
         android:onClick="onStart"
         android:text="@string/StartButtonText"
         app:layout_constraintEnd_toEndOf="@+id/roundsInput"
         app:layout_constraintStart_toStartOf="@+id/roundsInput"
         app:layout_constraintTop_toBottomOf="@+id/roundsInput" />
+
+    <Button
+        android:id="@+id/howToPlayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onHowToPlay"
+        android:text="@string/HowToPlayButtonText"
+        app:layout_constraintEnd_toEndOf="@+id/roundsInput"
+        app:layout_constraintStart_toStartOf="@+id/roundsInput"
+        app:layout_constraintTop_toBottomOf="@+id/startGameButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

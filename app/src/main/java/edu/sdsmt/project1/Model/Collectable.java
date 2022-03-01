@@ -21,7 +21,7 @@ public class Collectable {
     public Collectable(Context context, int id, float scale) {
         this.id = id;
         this.scale = scale;
-        this.bitmap = BitmapFactory.decodeResource(context.getResources(), id);
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), edu.sdsmt.project1.R.drawable.collectable);
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
     }

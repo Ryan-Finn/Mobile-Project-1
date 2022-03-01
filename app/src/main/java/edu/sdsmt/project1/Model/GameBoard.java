@@ -2,6 +2,8 @@ package edu.sdsmt.project1.Model;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class GameBoard {
@@ -12,10 +14,12 @@ public class GameBoard {
     private final static String IDS = "GameBoard.ids";
     private Player currentPlayer;
     private int rounds;
+    private Context context;
 
     public GameBoard(Context context) {
+        this.context = context;
         for (int i = 0; i < 21; i++) {
-            Collectable collectable = new Collectable(context, edu.sdsmt.project1.R.drawable.collectable, 0.2f);
+            Collectable collectable = new Collectable(context, i, 0.2f);
             collectables.add(collectable);
         }
     }
@@ -55,7 +59,6 @@ public class GameBoard {
             locations[i * 2 + 1] = collectable.getY();
             ids[i] = collectable.getId();
         }
-
         bundle.putFloatArray(REL_LOCATIONS, relLocations);
         bundle.putFloatArray(LOCATIONS, locations);
         bundle.putIntArray(IDS,  ids);
@@ -66,6 +69,18 @@ public class GameBoard {
         float [] locations = bundle.getFloatArray(LOCATIONS);
         int [] ids = bundle.getIntArray(IDS);
 
+        collectables.clear();
+
+        for (int i = 0; i < ids.length; i++) {
+            Collectable collectable = new Collectable(context, ids[i], 0.2f);
+            collectable.setRelX(relLocations[i*2]);
+            collectable.setRelY(relLocations[i*2+1]);
+            collectable.setX(locations[i*2]);
+            collectable.setY(locations[i*2+1]);
+            collectable.setShuffle(false);
+            collectables.add(collectable);
+        }
+        /*
         for (int i = 0; i < ids.length - 1; i++) {
             for(int j = i + 1; j < collectables.size(); j++) {
                 if(ids[i] == collectables.get(j).getId()) {
@@ -76,14 +91,14 @@ public class GameBoard {
             }
         }
 
-        for (int i = 0; i < collectables.size(); i++) {
+        for (int i = 0; i < ids.length-1; i++) {
             Collectable collectable = collectables.get(i);
             collectable.setRelX(relLocations[i*2]);
             collectable.setRelY(relLocations[i*2+1]);
             collectable.setX(locations[i*2]);
             collectable.setY(locations[i*2+1]);
             collectable.setShuffle(false);
-        }
+        }*/
     }
 
     public boolean isEndGame(){ return rounds <= 0 || collectables.isEmpty(); }

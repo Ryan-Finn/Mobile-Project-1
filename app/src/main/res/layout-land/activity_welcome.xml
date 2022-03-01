@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
         android:text="@string/WelcomeText"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textColorHighlight="@color/black"

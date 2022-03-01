@@ -13,6 +13,7 @@ public class CaptureObject {
     protected float height;
     protected float scale;
 
+
     /**
      * Gets collectables that are contained within a capture object from the GameBoardActivity's
      * list of displayed collectables. This is called when the player lifts all of their fingers,
@@ -54,6 +55,11 @@ public class CaptureObject {
 
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    public void setStartPoint(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void setAngle(float angle) {

@@ -126,6 +126,11 @@ public class GameBoardView extends View {
             default:
                 capture = null;
         }
+
+        if (capture != null) {
+            capture.setStartPoint((float) getWidth()/2, (float) getHeight()/2);
+        }
+
         invalidate();
     }
 

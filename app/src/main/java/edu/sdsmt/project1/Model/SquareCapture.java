@@ -2,32 +2,23 @@ package edu.sdsmt.project1.Model;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class SquareCapture extends CaptureObject {
-    private final float size = 200;
-    private float scale = 1f;
+    public SquareCapture() {
+        this.scale = .2f;
+    }
 
-    private boolean collides(Collectable obj, float viewWidth, float viewHeight) {
-        float objX = obj.getX() * viewWidth;
-        float objY = obj.getY() * viewHeight;
+    private boolean intersects(Collectable obj) {
+        float objX = obj.getX();
+        float objY = obj.getY();
         float objRadius = obj.getRadius();
-        float xDist = Math.abs(objX - x);
-        float yDist = Math.abs(objY - y);
-        float dx, dy;
+        float dx = objX - Math.max(x - width/2, Math.min(objX, x + width/2));
+        float dy = objY - Math.max(y - height/2, Math.min(objY, y + height/2));
 
-        // Does not collide, end early
-        if (xDist > (size/2 + objRadius) || yDist > (size/2 + objRadius)) {return false;}
-
-        // They collide at a side of the rect, not corner
-        if (xDist <= (size/2 + objRadius) || yDist <= (size/2 + objRadius)) {return true;}
-
-        // Corner check if they collide
-        dx = xDist - size/2;
-        dy = yDist - size/2;
-
-        return ( (dx*dx) + (dy*dy) <= (objRadius*objRadius) );
+        return (dx * dx + dy * dy) < (objRadius * objRadius);
     }
 
     @Override
@@ -35,7 +26,7 @@ public class SquareCapture extends CaptureObject {
         ArrayList<Collectable> contained = new ArrayList<>();
 
         for (Collectable obj : list) {
-            if (collides(obj, width, height)) {
+            if (intersects(obj)) {
                 contained.add(obj);
             }
         }
@@ -45,14 +36,11 @@ public class SquareCapture extends CaptureObject {
 
     @Override
     public void draw(Canvas canvas, Paint p) {
+        this.width = scale * canvas.getWidth();
+        this.height = scale * canvas.getWidth();
+
         // Draw a square on the screen
-        canvas.drawRect(x - size/2,y - size/2,x + size/2,y + size/2, p);
+        canvas.drawRect(x - width/2,y - height/2,x + width/2,y + height/2, p);
     }
-
-    @Override
-    public float getScale() { return scale; }
-
-    @Override
-    public void setScale(float scale) { this.scale = scale; }
 }
 

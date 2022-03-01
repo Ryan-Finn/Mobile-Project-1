@@ -126,7 +126,6 @@ public class GameBoardView extends View {
             default:
                 capture = null;
         }
-
         invalidate();
     }
 
@@ -164,7 +163,6 @@ public class GameBoardView extends View {
     @Override
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
-        Log.i(" listener", "reached onTouch");
         int id = event.getPointerId(event.getActionIndex());
 
         if (captureType != -1) {
@@ -191,7 +189,6 @@ public class GameBoardView extends View {
                     touch2.clear();
                     invalidate();
                     return true;
-
                 case MotionEvent.ACTION_POINTER_UP:
                     if (id == touch2.id) {
                         touch2.clear();
@@ -238,7 +235,7 @@ public class GameBoardView extends View {
                 float da = angle2 - angle1;
                 rotate(da, touch1.x, touch1.y);
             }
-            else if (captureType == RECTANGLE) {
+            else {
                 float delLastX = touch2.lastX - touch1.lastX;
                 float delLastY = touch2.lastY - touch1.lastY;
                 float disLast = delLastX * delLastX + delLastY * delLastY;

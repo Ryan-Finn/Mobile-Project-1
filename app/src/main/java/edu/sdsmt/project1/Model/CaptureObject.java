@@ -11,6 +11,7 @@ public class CaptureObject {
     protected float y = 0;
     protected float width;
     protected float height;
+    protected float scale;
 
     /**
      * Gets collectables that are contained within a capture object from the GameBoardActivity's
@@ -18,30 +19,45 @@ public class CaptureObject {
      * thus ending their turn.
      *
      * @param list - List of collectables in the main class
-     *
      * @return Collectables contained within the capture object.
      */
     public ArrayList<Collectable> getContainedCollectables(ArrayList<Collectable> list) {
         return new ArrayList<>();
     }
 
-    public void draw(Canvas canvas, Paint p) {}
+    public void draw(Canvas canvas, Paint p) {
+    }
 
-    public float getX() { return x; }
+    public float getX() {
+        return x;
+    }
 
-    public float getY() { return y; }
+    public float getY() {
+        return y;
+    }
 
-    public float getScale() { return 0; }
+    public float getScale() {
+        return scale;
+    }
 
-    public float getAngle() { return 0; }
+    public float getAngle() {
+        return 0;
+    }
 
-    public void setX(float x) { this.x = x; }
+    public void setX(float x) {
+        this.x = x;
+    }
 
-    public void setY(float y) { this.y = y; }
+    public void setY(float y) {
+        this.y = y;
+    }
 
-    public void setScale(float scale) {}
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
 
-    public void setAngle(float angle) {}
+    public void setAngle(float angle) {
+    }
 
     public void debug(Canvas canvas, ArrayList<Collectable> list) {
         Paint p = new Paint();
@@ -56,6 +72,5 @@ public class CaptureObject {
             canvas.drawCircle(obj.getX(), obj.getY(), obj.getRadius(), p);
         }
     }
-
 }
 

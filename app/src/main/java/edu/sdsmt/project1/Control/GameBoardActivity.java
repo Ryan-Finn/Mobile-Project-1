@@ -107,10 +107,12 @@ public class GameBoardActivity extends AppCompatActivity {
                     + "'s Score\n" + view.getPlayer1Score());
             intent.putExtra(EndGameActivity.PLAYER2_MESSAGE, view.getPlayer2Name()
                     + "'s Score\n" + view.getPlayer2Score());
-            String winner = view.getPlayer2Name() ;
+            String winner = "WINNER\n"+ view.getPlayer2Name() ;
             if(Integer.parseInt(view.getPlayer1Score()) > Integer.parseInt(view.getPlayer2Score()))
                 winner = "WINNER\n" + view.getPlayer1Name();
 
+            if(Integer.parseInt(view.getPlayer1Score()) == Integer.parseInt(view.getPlayer2Score()))
+                winner = "TIE!";
             intent.putExtra(EndGameActivity.WINNER_MESSAGE, winner);
             startActivity(intent);
             finish();

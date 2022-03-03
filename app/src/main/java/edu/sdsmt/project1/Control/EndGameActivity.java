@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import edu.sdsmt.project1.R;
@@ -33,5 +34,10 @@ public class EndGameActivity extends AppCompatActivity {
         player2.setText(intent.getStringExtra(PLAYER2_MESSAGE));
         winner.setText(intent.getStringExtra(WINNER_MESSAGE));
 
+    }
+
+    public void onReturnClick(View view) {
+
+        finish();
     }
 }

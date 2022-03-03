@@ -25,6 +25,6 @@
 
     <!-- EndGame -->
     <string name="winner_string">WINNER</string>
-    <string name="back_string">Back</string>
+    <string name="return_string">Return</string>
 </resources>
 

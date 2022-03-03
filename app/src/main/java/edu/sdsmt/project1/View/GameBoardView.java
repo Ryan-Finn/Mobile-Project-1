@@ -188,12 +188,6 @@ public class GameBoardView extends View {
 
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    board.capture(capture);
-                    captureType = -1;
-                    touch1.clear();
-                    touch2.clear();
-                    invalidate();
-                    return true;
                 case MotionEvent.ACTION_POINTER_UP:
                     if (id == touch2.id) {
                         touch2.clear();
@@ -212,6 +206,13 @@ public class GameBoardView extends View {
         return false;
     }
 
+    public void captureClicked() {
+        board.capture(capture);
+        captureType = -1;
+        touch1.clear();
+        touch2.clear();
+        invalidate();
+    }
     private void getPositions(MotionEvent event) {
         for (int i = 0; i < event.getPointerCount(); i++) {
             int id = event.getPointerId(i);

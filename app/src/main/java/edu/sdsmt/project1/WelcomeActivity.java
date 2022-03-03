@@ -34,6 +34,9 @@ public class WelcomeActivity extends AppCompatActivity {
         intent.putExtra(PLAYER2NAME_MESSAGE, player2.getText().toString());
         intent.putExtra(ROUNDS_MESSAGE, rounds.getText().toString());
         startActivity(intent);
+        player1.setText("");
+        player2.setText("");
+        rounds.setText("");
     }
 
     public void onHowToPlay(View view) {

@@ -78,13 +78,8 @@ public class GameBoardActivity extends AppCompatActivity {
         rounds.setText(r);
         player1Name.setTextColor(Color.parseColor("#FF0000"));
 
-        Log.i("CurrentPlayer", "Reached gameboard");
-        view.setOnTouchListener((view, motionEvent) -> {
-            view.onTouchEvent(motionEvent);
-            updateGUI();
-            isEndGame();
-            return true;
-        });
+
+
 
         //any target
         ActivityResultContracts.StartActivityForResult contract =
@@ -138,6 +133,12 @@ public class GameBoardActivity extends AppCompatActivity {
         rounds.setText(view.getRounds());
     }
 
+
+    public void onCaptureClick(View v) {
+        view.captureClicked();
+        updateGUI();
+        isEndGame();
+    }
 
     public void onCaptureOptionsClick(View view) {
         Intent switchActivityIntent = new Intent(this, CaptureSelectionActivity.class);

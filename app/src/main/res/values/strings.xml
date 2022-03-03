@@ -16,6 +16,7 @@
     <string name="Rounds">Rounds</string>
     <string name="Name2">Player 2</string>
     <string name="Player2ScoreString">Player 2 Score</string>
+    <string name="capture">Capture!</string>
 
     <!-- CaptureSelection -->
     <string name="circle_description">Circle_Capture</string>

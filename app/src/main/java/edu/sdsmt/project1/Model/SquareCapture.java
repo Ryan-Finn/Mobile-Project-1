@@ -5,10 +5,11 @@ import android.graphics.Paint;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SquareCapture extends CaptureObject {
     public SquareCapture() {
-        this.scale = .2f;
+        this.scale = .5f;
     }
 
     private boolean intersects(Collectable obj) {
@@ -26,7 +27,7 @@ public class SquareCapture extends CaptureObject {
         ArrayList<Collectable> contained = new ArrayList<>();
 
         for (Collectable obj : list) {
-            if (intersects(obj)) {
+            if (intersects(obj) && random.nextFloat() <= 0.5 * 0.5f / scale) {
                 contained.add(obj);
             }
         }
@@ -35,9 +36,10 @@ public class SquareCapture extends CaptureObject {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint p) {
-        this.width = scale * canvas.getWidth();
-        this.height = scale * canvas.getWidth();
+    public void draw(Canvas canvas, Paint p, Random rand) {
+        random = rand;
+        this.width = scale * Math.min(canvas.getWidth(), canvas.getHeight());
+        this.height = scale * Math.max(canvas.getWidth(), canvas.getHeight());
 
         // Draw a square on the screen
         canvas.drawRect(x - width/2,y - height/2,x + width/2,y + height/2, p);

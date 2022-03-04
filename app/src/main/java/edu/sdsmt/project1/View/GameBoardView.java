@@ -158,7 +158,7 @@ public class GameBoardView extends View {
         }
 
         if (captureType != -1) {
-            capture.draw(canvas, capturePaint);
+            capture.draw(canvas, capturePaint, random);
             capture.debug(canvas, board.getCollectables());
         }
 
@@ -271,9 +271,11 @@ public class GameBoardView extends View {
     }
 
     public void scale(float dScale, float x1, float y1) {
-        capture.setScale(capture.getScale() * dScale);
-        capture.setX(x1 - (x1 - capture.getX()) * dScale);
-        capture.setY(y1 - (y1 - capture.getY()) * dScale);
+        if (capture.getScale() * dScale >= 0.5f && capture.getScale() * dScale <= 1.0f) {
+            capture.setScale(capture.getScale() * dScale);
+            capture.setX(x1 - (x1 - capture.getX()) * dScale);
+            capture.setY(y1 - (y1 - capture.getY()) * dScale);
+        }
     }
 
     public void saveInstanceState(Bundle bundle) { board.saveInstanceState(bundle); }

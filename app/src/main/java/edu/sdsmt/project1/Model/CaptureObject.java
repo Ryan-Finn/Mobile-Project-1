@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CaptureObject {
     protected float x = 0;
@@ -12,7 +13,7 @@ public class CaptureObject {
     protected float width;
     protected float height;
     protected float scale;
-
+    protected Random random;
 
     /**
      * Gets collectables that are contained within a capture object from the GameBoardActivity's
@@ -26,8 +27,7 @@ public class CaptureObject {
         return new ArrayList<>();
     }
 
-    public void draw(Canvas canvas, Paint p) {
-    }
+    public void draw(Canvas canvas, Paint p, Random random) {}
 
     public float getX() {
         return x;

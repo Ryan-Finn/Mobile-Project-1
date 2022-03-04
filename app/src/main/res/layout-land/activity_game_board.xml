@@ -79,9 +79,9 @@
         android:layout_height="wrap_content"
         android:onClick="onCaptureOptionsClick"
         android:text="@string/capture_options"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toStartOf="@+id/captureButton"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <Button
@@ -90,17 +90,10 @@
         android:layout_height="wrap_content"
         android:onClick="onCaptureClick"
         android:text="@string/capture"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

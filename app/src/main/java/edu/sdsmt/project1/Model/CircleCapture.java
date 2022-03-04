@@ -3,6 +3,7 @@ package edu.sdsmt.project1.Model;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CircleCapture extends CaptureObject {
     private float radius;
@@ -30,9 +31,9 @@ public class CircleCapture extends CaptureObject {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint p) {
-        // Draw a circle on the screen
-        radius = scale * canvas.getWidth();
+    public void draw(Canvas canvas, Paint p, Random rand) {
+        random = rand;
+        radius = scale * Math.min(canvas.getWidth(), canvas.getHeight());
         canvas.drawCircle(x, y, radius, p);
     }
 }

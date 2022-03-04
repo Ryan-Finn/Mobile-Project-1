@@ -3,6 +3,7 @@ package edu.sdsmt.project1.Model;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class LineCapture extends CaptureObject {
     private float angle = 0;
@@ -37,26 +38,27 @@ public class LineCapture extends CaptureObject {
         };
 
         for (Collectable obj : list) {
-            float ox = obj.getX();
-            float oy = obj.getY();
-            dx = ox - x;
-            dy = oy - y;
-            // perpendicular distance from point to line
-            float dist = (float)Math.abs(dy * Math.cos(a) - dx * Math.sin(a));
+            if (random.nextFloat() <= 0.75) {
+                float ox = obj.getX();
+                float oy = obj.getY();
+                dx = ox - x;
+                dy = oy - y;
+                // perpendicular distance from point to line
+                float dist = (float) Math.abs(dy * Math.cos(a) - dx * Math.sin(a));
 
-            if (dist <= obj.getRadius() + height / 2) {
-                dist = (float)Math.sqrt(dx * dx + dy * dy - dist * dist);
+                if (dist <= obj.getRadius() + height / 2) {
+                    dist = (float) Math.sqrt(dx * dx + dy * dy - dist * dist);
 
-                if (dist <= width / 2) {
-                    contained.add(obj);
-                }
-                else if (dist <= width / 2 + obj.getRadius()) {
-                    float r2 = obj.getRadius() * obj.getRadius();
+                    if (dist <= width / 2) {
+                        contained.add(obj);
+                    } else if (dist <= width / 2 + obj.getRadius()) {
+                        float r2 = obj.getRadius() * obj.getRadius();
 
-                    for (int i = 0; i < 6; i++) {
-                        if (squareDistance(cs[2 * i], cs[2 * i + 1], ox, oy) <= r2) {
-                            contained.add(obj);
-                            break;
+                        for (int i = 0; i < 6; i++) {
+                            if (squareDistance(cs[2 * i], cs[2 * i + 1], ox, oy) <= r2) {
+                                contained.add(obj);
+                                break;
+                            }
                         }
                     }
                 }
@@ -67,10 +69,10 @@ public class LineCapture extends CaptureObject {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint p) {
-        // Draw a line on the screen
-        width = 0.8f * canvas.getWidth();
-        height = 0.1f * canvas.getWidth();
+    public void draw(Canvas canvas, Paint p, Random rand) {
+        random = rand;
+        width = 0.8f * Math.min(canvas.getWidth(), canvas.getHeight());
+        height = 0.1f * Math.min(canvas.getWidth(), canvas.getHeight());
         p.setStrokeWidth(0.1f * canvas.getWidth());
         double a = angle * Math.PI / 180;
         float dx = width * (float)Math.cos(a) / 2;

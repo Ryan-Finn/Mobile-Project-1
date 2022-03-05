@@ -3,13 +3,13 @@ package edu.sdsmt.project1.Control;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import edu.sdsmt.project1.R;
@@ -135,6 +135,17 @@ public class GameBoardActivity extends AppCompatActivity {
         view.captureClicked();
         updateGUI();
         isEndGame();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameBoardActivity.this);
+        builder.setTitle(R.string.QUIT_GAME);
+        builder.setMessage(R.string.QUIT_GAME_MESSAGE);
+
+        builder.setPositiveButton(android.R.string.ok, (dialog, which) -> finish());
+        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 
     public void onCaptureOptionsClick(View view) {

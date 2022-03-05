@@ -25,7 +25,6 @@ public class GameBoardActivity extends AppCompatActivity {
     private TextView player2Score;
     private TextView rounds;
     private ActivityResultLauncher<Intent> captureResultLauncher;
-
     @Override
     protected void onSaveInstanceState(@NonNull Bundle bundle) {
         super.onSaveInstanceState(bundle);
@@ -36,9 +35,9 @@ public class GameBoardActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle bundle) {
         super.onRestoreInstanceState(bundle);
         view.loadInstanceState(bundle);
+        updateGUI();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +77,7 @@ public class GameBoardActivity extends AppCompatActivity {
         rounds.setText(r);
         player1Name.setTextColor(Color.parseColor("#FF0000"));
 
-
-
-
+        
         //any target
         ActivityResultContracts.StartActivityForResult contract =
                 new ActivityResultContracts.StartActivityForResult();

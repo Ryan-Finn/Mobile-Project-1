@@ -137,12 +137,12 @@ public class GameBoardActivity extends AppCompatActivity {
         isEndGame();
     }
 
+    //GRADING: BACK
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(GameBoardActivity.this);
         builder.setTitle(R.string.QUIT_GAME);
         builder.setMessage(R.string.QUIT_GAME_MESSAGE);
-
         builder.setPositiveButton(android.R.string.ok, (dialog, which) -> finish());
         builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());
         builder.show();

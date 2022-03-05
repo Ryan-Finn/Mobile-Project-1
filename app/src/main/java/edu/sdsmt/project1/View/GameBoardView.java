@@ -19,6 +19,7 @@ import edu.sdsmt.project1.Model.LineCapture;
 import edu.sdsmt.project1.Model.SquareCapture;
 
 public class GameBoardView extends View {
+    private static final String CAPTURE_TYPE = "gameBoard.CaptureType" ;
     private GameBoard board;
     private static final Random random = new Random();
     public static final int CIRCLE = 0;
@@ -32,6 +33,10 @@ public class GameBoardView extends View {
     private Paint capturePaint;
     public int captureType = -1;
     private CaptureObject capture;
+
+    public boolean isCaptureEnabled() {
+        return captureType != -1;
+    }
 
     private static class Touch {
         public int id = -1;
@@ -129,6 +134,7 @@ public class GameBoardView extends View {
 
         if (capture != null) {
             capture.setStartPoint((float) getWidth()/2, (float) getHeight()/2);
+          //  capture.setStartPoint((float) 500, (float) 500);
         }
 
         invalidate();
@@ -278,9 +284,17 @@ public class GameBoardView extends View {
         }
     }
 
-    public void saveInstanceState(Bundle bundle) { board.saveInstanceState(bundle); }
+    public void saveInstanceState(Bundle bundle) {
+        Log.i("inside save", String.valueOf(captureType));
+        bundle.putInt(CAPTURE_TYPE, captureType);
+        board.saveInstanceState(bundle);
+        }
 
-    public void loadInstanceState(Bundle bundle) { board.loadInstanceState(bundle); }
+    public void loadInstanceState(Bundle bundle) {
+
+        board.loadInstanceState(bundle);
+       setCapture(bundle.getInt(CAPTURE_TYPE));
+        Log.i("inside laod", String.valueOf(captureType));}
 
     public void addPlayer(String name, int id) { board.addPlayer(name, id); }
 

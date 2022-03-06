@@ -1,5 +1,6 @@
 package edu.sdsmt.group4.Control;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,8 +35,9 @@ public class EndGameActivity extends AppCompatActivity {
 
     }
 
-    public void onReturnClick(View view) {
-
-        finish();
+    @Override
+    public void onBackPressed() {
+      finish();
     }
+
 }

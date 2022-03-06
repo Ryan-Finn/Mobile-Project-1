@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class GameBoard {
     private static final String PLAYER_NAMES ="GameBoard.playerNames" ;
     private static final String PLAYER_SCORES ="GameBoard.playerScores" ;
-    private static final String CURRENT_PLAYER = "GameBoard.currentPlayer";
     private static final String CURRENT_PLAYER_ID = "GameBoard.currentPlayerScore";
     private final ArrayList<Collectable> collectables = new ArrayList<>();
 

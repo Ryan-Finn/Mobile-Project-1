@@ -145,7 +145,7 @@ public class GameBoardActivity extends AppCompatActivity {
         player1Score.setText(view.getPlayer1Score());
         player2Score.setText(view.getPlayer2Score());
         rounds.setText(view.getRounds());
-        capture.setEnabled(view.isCaptureOptionSelected());
+        capture.setEnabled(view.isCaptureEnabled());
     }
 
 

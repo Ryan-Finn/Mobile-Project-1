@@ -326,19 +326,20 @@ public class GameBoardView extends View {
 
     public void loadInstanceState(Bundle bundle) {
         board.loadInstanceState(bundle);
-
-        float[] coordinates = bundle.getFloatArray(CAPTURE_COORDINATES);
-        float[] screenSize = bundle.getFloatArray(SCREEN_SIZE);
-        coordinates[0] = coordinates[0] * screenSize[1];
-        coordinates[1] = coordinates[1] * screenSize[0];
-
         // Set the capture type and saved coordinates
         setCapture(bundle.getInt(CAPTURE_TYPE));
-        if (capture != null) {
-            capture.setX(coordinates[0]);
-            capture.setY(coordinates[1]);
-            if (bundle.getInt(CAPTURE_TYPE) == LINE) {
-                capture.setAngle(bundle.getFloat(PREVIOUS_ANGLE));
+
+        if(captureType != -1) {
+            float[] coordinates = bundle.getFloatArray(CAPTURE_COORDINATES);
+            float[] screenSize = bundle.getFloatArray(SCREEN_SIZE);
+            coordinates[0] = coordinates[0] * screenSize[1];
+            coordinates[1] = coordinates[1] * screenSize[0];
+            if (capture != null) {
+                capture.setX(coordinates[0]);
+                capture.setY(coordinates[1]);
+                if (bundle.getInt(CAPTURE_TYPE) == LINE) {
+                    capture.setAngle(bundle.getFloat(PREVIOUS_ANGLE));
+                }
             }
         }
     }

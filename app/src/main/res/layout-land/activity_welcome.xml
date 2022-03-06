@@ -19,17 +19,6 @@
         app:layout_constraintTop_toBottomOf="@+id/nameInput1" />
 
     <Button
-        android:id="@+id/howToPlayButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onHowToPlay"
-        android:text="@string/HowToPlayButtonText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/nameInput2"
-        app:layout_constraintTop_toBottomOf="@+id/nameInput1"
-        tools:ignore="TextContrastCheck" />
-
-    <Button
         android:id="@+id/startGameButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,6 +27,17 @@
         app:layout_constraintEnd_toEndOf="@+id/howToPlayButton"
         app:layout_constraintStart_toStartOf="@+id/howToPlayButton"
         app:layout_constraintTop_toBottomOf="@+id/nameInput2"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/howToPlayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onHowToPlay"
+        android:text="@string/HowToPlayButtonText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nameInput2"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput1"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -51,7 +51,6 @@
         android:textColor="@color/black"
         android:textColorHighlight="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

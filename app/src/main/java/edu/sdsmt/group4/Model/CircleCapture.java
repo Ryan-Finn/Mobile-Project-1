@@ -31,9 +31,9 @@ public class CircleCapture extends CaptureObject {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint p, Random rand) {
+    public void draw(Canvas canvas, float canvas_width, float canvas_height, Paint p, Random rand) {
         random = rand;
-        radius = scale * Math.min(canvas.getWidth(), canvas.getHeight());
+        radius = scale * Math.min(canvas_width, canvas_height);
         canvas.drawCircle(x, y, radius, p);
     }
 }

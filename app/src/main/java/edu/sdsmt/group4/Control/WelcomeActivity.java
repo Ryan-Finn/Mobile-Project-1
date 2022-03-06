@@ -1,6 +1,6 @@
 package edu.sdsmt.group4.Control;
 
-/**
+/* *
  * Project 1 Grading
  *
  * Group:
@@ -15,22 +15,22 @@ package edu.sdsmt.group4.Control;
  *
  * 	Play activity and custom view
  *
- * 		____ 9pt Activity appearence
- * 		____ 16pt Static Custom View
- * 		____ 20pt Dynamic part of the Custom View
- * 		____ 15pt Rotation
+ * 		Done 9pt Activity appearance
+ * 		Done 16pt Static Custom View
+ * 		Done 20pt Dynamic part of the Custom View
+ * 		Done 15pt Rotation
  *
  * 	Welcome activity and Game Class
  *
- * 		____ 13pt Welcome activity appearence
+ * 		____ 13pt Welcome activity appearance
  * 		____ 20pt Applying capture rules
  * 		____ 12pt Game state
  * 		____ 15pt Rotation
- * 		What is the probaility of the reactangle capture: _____
+ * 		What is the probability of the rectangle capture: _____
  *
  * 	Capture activity and activity sequencing
  *
- * 		Done 9pt Capture activity apearence
+ * 		Done 9pt Capture activity appearance
  * 		Done 16pt Player round sequencing
  * 		Done 20pt Move to next activity
  * 		Done 15pt Rotation
@@ -52,7 +52,7 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import edu.sdsmt.group4.Control.GameBoardActivity;
 
 import edu.sdsmt.group4.R;
 

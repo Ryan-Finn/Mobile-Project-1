@@ -7,10 +7,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
 import java.util.Random;
 import edu.sdsmt.group4.Model.CaptureObject;
 import edu.sdsmt.group4.Model.CircleCapture;
@@ -22,22 +22,25 @@ import edu.sdsmt.group4.Model.SquareCapture;
 public class GameBoardView extends View {
     private static final String CAPTURE_TYPE = "gameBoard.CaptureType" ;
     private static final String CAPTURE_COORDINATES = "gameBoard.CaptureCoordinates";
-    private static final String SCREEN_SIZE = "gameBoard.PreviousScreenSize";
+    private static final String PREVIOUS_SCALE = "gameBoard.PreviousScale";
     private static final String PREVIOUS_ANGLE = "gameBoard.PreviousAngle";
+    private static final String SCREEN_SIZE = "gameBoard.ScreenSize";
     private static final String ROUNDS = "gameBoard.rounds";
     private GameBoard board;
+    private float aspect;
     private static final Random random = new Random();
     public final int CIRCLE = 0;
     public final int RECTANGLE = 1;
     public final int LINE = 2;
     private final Touch touch1 = new Touch();
     private final Touch touch2 = new Touch();
-    final float SCALE_IN_VIEW = 1.0f;
     private Paint fillPaint;
     private Paint outlinePaint;
     private Paint capturePaint;
     public int captureType = -1;
     private CaptureObject capture;
+    private float canvas_width;
+    private float canvas_height;
 
     public boolean isCaptureEnabled() {
         return captureType != -1;
@@ -88,20 +91,23 @@ public class GameBoardView extends View {
 
     public GameBoardView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public GameBoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public GameBoardView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        aspect = metrics.widthPixels / (float)metrics.heightPixels;
+
         board = new GameBoard(getContext());
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -148,28 +154,25 @@ public class GameBoardView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width = getWidth();
-        int height = getHeight();
+        canvas_width = aspect * getHeight();
+        canvas_height = (float)getHeight();
 
-        int canvasX = (int) (width * (1.0f - SCALE_IN_VIEW) / 2);
-        int canvasY = (int) (height * (1.0f - SCALE_IN_VIEW) / 2);
-
-        width = (int)(width * SCALE_IN_VIEW);
-        height = (int)(height * SCALE_IN_VIEW);
+        float canvasX = ((float)getWidth() - canvas_width) / 2f;
+        float canvasY = 0;
 
         canvas.save();
 
-        canvas.drawRect(canvasX, canvasY, width, height, fillPaint);
-        canvas.drawRect(canvasX, canvasY, width, height, outlinePaint);
+        canvas.drawRect(canvasX, canvasY, canvas_width, canvas_height, fillPaint);
+        canvas.drawRect(canvasX, canvasY, canvas_width, canvas_height, outlinePaint);
 
         for(Collectable collectable : board.getCollectables()) {
-            collectable.shuffle(canvas, canvasX, canvasY, random);
+            collectable.shuffle(canvas_width, canvas_height, canvasX, canvasY, random);
             collectable.setShuffle(false);
-            collectable.draw(canvas, canvasX, canvasY);
+            collectable.draw(canvas, canvas_width, canvas_height, canvasX, canvasY);
         }
 
         if (captureType != -1) {
-            capture.draw(canvas, capturePaint, random);
+            capture.draw(canvas, canvas_width, canvas_height, capturePaint, random);
             // capture.debug(canvas, board.getCollectables()); // Show hit boxes with realtime collision updates
         }
 
@@ -224,6 +227,7 @@ public class GameBoardView extends View {
         touch2.clear();
         invalidate();
     }
+
     private void getPositions(MotionEvent event) {
         for (int i = 0; i < event.getPointerCount(); i++) {
             int id = event.getPointerId(i);
@@ -294,7 +298,7 @@ public class GameBoardView extends View {
     public void saveInstanceState(Bundle bundle) {
         Log.i("inside save", String.valueOf(captureType));
         float xPos, yPos;
-        float[] screenSize = new float[]{getWidth(), getHeight()};
+        float[] screenSize = new float[]{canvas_width, canvas_height};
 
         // Save the capture type & data
         bundle.putInt(CAPTURE_TYPE, captureType);
@@ -302,29 +306,18 @@ public class GameBoardView extends View {
         if (capture != null) {
             xPos = capture.getX() / screenSize[0];
             yPos = capture.getY() / screenSize[1];
-
-            // Put the capture objects back on the screen if they go off of it
-            if (xPos > 1) {
-                xPos = .95f;
-            } else if (xPos < 0) {
-                xPos = 0f;
-            }
-
-            if (yPos > 1) {
-                yPos = .95f;
-            } else if (yPos < 0) {
-                yPos = 0f;
-            }
-
             // Save the angle if the capture is a line
             if (captureType == LINE) {
                 bundle.putFloat(PREVIOUS_ANGLE, capture.getAngle());
+            }
+            else if (captureType == RECTANGLE) {
+                bundle.putFloat(PREVIOUS_SCALE, capture.getScale());
             }
             bundle.putFloatArray(CAPTURE_COORDINATES, new float[]{xPos, yPos});
             bundle.putFloatArray(SCREEN_SIZE, screenSize);
         }
         board.saveInstanceState(bundle);
-        }
+    }
 
     public void loadInstanceState(Bundle bundle) {
         board.loadInstanceState(bundle);

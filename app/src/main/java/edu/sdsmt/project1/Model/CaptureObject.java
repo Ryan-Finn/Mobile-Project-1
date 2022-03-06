@@ -57,14 +57,10 @@ public class CaptureObject {
         this.scale = scale;
     }
 
-    public void setStartPoint(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
     public void setAngle(float angle) {
     }
 
+    /* Debug function that shows hit boxes for all collectable objects
     public void debug(Canvas canvas, ArrayList<Collectable> list) {
         Paint p = new Paint();
         ArrayList<Collectable> collected = getContainedCollectables(list);
@@ -77,6 +73,6 @@ public class CaptureObject {
             p.setAlpha(40);
             canvas.drawCircle(obj.getX(), obj.getY(), obj.getRadius(), p);
         }
-    }
+    }*/
 }
 

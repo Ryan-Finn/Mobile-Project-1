@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#00249E">
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/nameInput1"
@@ -13,7 +12,7 @@
         android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:hint="@string/NameInput1Hint"
         android:textColor="@color/white"
-        android:textColorHint="#BCAAA4"
+        android:textColorHint="#D7CCC8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +26,7 @@
         android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:hint="@string/NameInput2Hint"
         android:textColor="@color/white"
-        android:textColorHint="#BCAAA4"
+        android:textColorHint="#D7CCC8"
         app:layout_constraintEnd_toEndOf="@+id/nameInput1"
         app:layout_constraintStart_toStartOf="@+id/nameInput1"
         app:layout_constraintTop_toBottomOf="@+id/nameInput1" />
@@ -40,7 +39,7 @@
         android:hint="@string/RoundsInputHint"
         android:inputType="number"
         android:textColor="@color/white"
-        android:textColorHint="#BCAAA4"
+        android:textColorHint="#D7CCC8"
         app:layout_constraintEnd_toEndOf="@+id/nameInput2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/nameInput2"
@@ -54,8 +53,8 @@
         android:text="@string/WelcomeText"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textColorHighlight="@color/black"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -19,7 +19,7 @@ public class GameBoard {
     private final static String LOCATIONS = "GameBoard.locations";
     private final static String IDS = "GameBoard.ids";
     private int rounds;
-    private Context context;
+    private final Context context;
 
     public GameBoard(Context context) {
         this.context = context;
@@ -110,7 +110,7 @@ public class GameBoard {
 
         currentPlayer = new Player(players.get(id).getName(), id);
 
-        /*
+        /* Old way of saving collectables
         for (int i = 0; i < ids.length - 1; i++) {
             for(int j = i + 1; j < collectables.size(); j++) {
                 if(ids[i] == collectables.get(j).getId()) {

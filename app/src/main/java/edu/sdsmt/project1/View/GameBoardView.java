@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
 import java.util.Random;
 import edu.sdsmt.project1.Model.CaptureObject;
 import edu.sdsmt.project1.Model.CircleCapture;
@@ -20,14 +21,17 @@ import edu.sdsmt.project1.Model.SquareCapture;
 
 public class GameBoardView extends View {
     private static final String CAPTURE_TYPE = "gameBoard.CaptureType" ;
+    private static final String CAPTURE_COORDINATES = "gameBoard.CaptureCoordinates";
+    private static final String SCREEN_SIZE = "gameBoard.PreviousScreenSize";
+    private static final String PREVIOUS_ANGLE = "gameBoard.PreviousAngle";
     private GameBoard board;
     private static final Random random = new Random();
-    public static final int CIRCLE = 0;
-    public static final int RECTANGLE = 1;
-    public static final int LINE = 2;
+    public final int CIRCLE = 0;
+    public final int RECTANGLE = 1;
+    public final int LINE = 2;
     private final Touch touch1 = new Touch();
     private final Touch touch2 = new Touch();
-    final static float SCALE_IN_VIEW = 1.0f;
+    final float SCALE_IN_VIEW = 1.0f;
     private Paint fillPaint;
     private Paint outlinePaint;
     private Paint capturePaint;
@@ -133,8 +137,8 @@ public class GameBoardView extends View {
         }
 
         if (capture != null) {
-            capture.setStartPoint((float) getWidth()/2, (float) getHeight()/2);
-          //  capture.setStartPoint((float) 500, (float) 500);
+            capture.setX((float) getWidth()/2);
+            capture.setY((float) getHeight()/2);
         }
 
         invalidate();
@@ -165,7 +169,7 @@ public class GameBoardView extends View {
 
         if (captureType != -1) {
             capture.draw(canvas, capturePaint, random);
-            capture.debug(canvas, board.getCollectables());
+            // capture.debug(canvas, board.getCollectables()); // Show hit boxes with realtime collision updates
         }
 
         canvas.restore();
@@ -256,8 +260,10 @@ public class GameBoardView extends View {
                 float delY = touch2.y - touch1.y;
                 float dis = delX * delX + delY * delY;
 
-                float ds = (float) Math.sqrt(dis / disLast);
-                scale(ds, touch1.x, touch1.y);
+                if (captureType == RECTANGLE) {
+                    float ds = (float) Math.sqrt(dis / disLast);
+                    scale(ds, touch1.x, touch1.y);
+                }
             }
         }
     }
@@ -286,15 +292,56 @@ public class GameBoardView extends View {
 
     public void saveInstanceState(Bundle bundle) {
         Log.i("inside save", String.valueOf(captureType));
+        float xPos, yPos;
+        float[] screenSize = new float[]{getWidth(), getHeight()};
+
+        // Save the capture type & data
         bundle.putInt(CAPTURE_TYPE, captureType);
+        if (capture != null) {
+            xPos = capture.getX() / screenSize[0];
+            yPos = capture.getY() / screenSize[1];
+
+            // Put the capture objects back on the screen if they go off of it
+            if (xPos > 1) {
+                xPos = .95f;
+            } else if (xPos < 0) {
+                xPos = 0f;
+            }
+
+            if (yPos > 1) {
+                yPos = .95f;
+            } else if (yPos < 0) {
+                yPos = 0f;
+            }
+
+            // Save the angle if the capture is a line
+            if (captureType == LINE) {
+                bundle.putFloat(PREVIOUS_ANGLE, capture.getAngle());
+            }
+            bundle.putFloatArray(CAPTURE_COORDINATES, new float[]{xPos, yPos});
+            bundle.putFloatArray(SCREEN_SIZE, screenSize);
+        }
         board.saveInstanceState(bundle);
         }
 
     public void loadInstanceState(Bundle bundle) {
-
         board.loadInstanceState(bundle);
-       setCapture(bundle.getInt(CAPTURE_TYPE));
-        Log.i("inside laod", String.valueOf(captureType));}
+
+        float[] coordinates = bundle.getFloatArray(CAPTURE_COORDINATES);
+        float[] screenSize = bundle.getFloatArray(SCREEN_SIZE);
+        coordinates[0] = coordinates[0] * screenSize[1];
+        coordinates[1] = coordinates[1] * screenSize[0];
+
+        // Set the capture type and saved coordinates
+        setCapture(bundle.getInt(CAPTURE_TYPE));
+        if (capture != null) {
+            capture.setX(coordinates[0]);
+            capture.setY(coordinates[1]);
+            if (bundle.getInt(CAPTURE_TYPE) == LINE) {
+                capture.setAngle(bundle.getFloat(PREVIOUS_ANGLE));
+            }
+        }
+    }
 
     public void addPlayer(String name, int id) { board.addPlayer(name, id); }
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import java.util.Random;
+import edu.sdsmt.group4.R;
 
 public class Collectable {
     private final Bitmap bitmap;
@@ -21,7 +22,7 @@ public class Collectable {
     public Collectable(Context context, int id, float scale) {
         this.id = id;
         this.scale = scale;
-        this.bitmap = BitmapFactory.decodeResource(context.getResources(), edu.sdsmt.group4.R.drawable.collectable);
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.collectable);
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
     }
@@ -30,7 +31,7 @@ public class Collectable {
         x = canvasX + relX * canvas_width;
         y = canvasY + relY * canvas_height;
         float window_aspect = canvas.getWidth() / (float) canvas.getHeight();
-        float canvas_aspect = canvas_width / (float)canvas_height;
+        float canvas_aspect = canvas_width / canvas_height;
         float second_scale = scale * canvas_aspect / window_aspect;
 
         canvas.save();
@@ -44,9 +45,8 @@ public class Collectable {
     }
 
     public void shuffle(float canvas_width, float canvas_height, float canvasX, float canvasY, Random rand) {
-        if (!doShuffle) {
+        if (!doShuffle)
             return;
-        }
 
         relX = rand.nextFloat();
         relY = rand.nextFloat();

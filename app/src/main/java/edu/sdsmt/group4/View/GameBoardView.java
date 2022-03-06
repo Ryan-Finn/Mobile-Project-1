@@ -17,7 +17,7 @@ import edu.sdsmt.group4.Model.CircleCapture;
 import edu.sdsmt.group4.Model.Collectable;
 import edu.sdsmt.group4.Model.GameBoard;
 import edu.sdsmt.group4.Model.LineCapture;
-import edu.sdsmt.group4.Model.SquareCapture;
+import edu.sdsmt.group4.Model.RectangleCapture;
 
 public class GameBoardView extends View {
     private static final String CAPTURE_TYPE = "gameBoard.CaptureType" ;
@@ -132,7 +132,7 @@ public class GameBoardView extends View {
                 break;
 
             case RECTANGLE:
-                capture = new SquareCapture();
+                capture = new RectangleCapture();
                 break;
 
             case LINE:
@@ -203,11 +203,10 @@ public class GameBoardView extends View {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                 case MotionEvent.ACTION_POINTER_UP:
-                    if (id == touch2.id) {
+                    if (id == touch2.id)
                         touch2.clear();
-                    } else if (id == touch1.id) {
+                    else if (id == touch1.id)
                         touch2.move(touch1);
-                    }
                     invalidate();
                     return true;
 
@@ -231,19 +230,17 @@ public class GameBoardView extends View {
     private void getPositions(MotionEvent event) {
         for (int i = 0; i < event.getPointerCount(); i++) {
             int id = event.getPointerId(i);
-
-            if (id == touch1.id) {
+            if (id == touch1.id)
                 touch1.updatePos(event.getX(i), event.getY(i));
-            } else if (id == touch2.id) {
+            else if (id == touch2.id)
                 touch2.updatePos(event.getX(i), event.getY(i));
-            }
         }
-
         invalidate();
     }
 
     private void move() {
-        if (touch1.id < 0) { return; }
+        if (touch1.id < 0)
+            return;
 
         touch1.computeDeltas();
         capture.setX(capture.getX() + touch1.dX);
@@ -307,12 +304,10 @@ public class GameBoardView extends View {
             xPos = capture.getX() / screenSize[0];
             yPos = capture.getY() / screenSize[1];
             // Save the angle if the capture is a line
-            if (captureType == LINE) {
+            if (captureType == LINE)
                 bundle.putFloat(PREVIOUS_ANGLE, capture.getAngle());
-            }
-            else if (captureType == RECTANGLE) {
+            else if (captureType == RECTANGLE)
                 bundle.putFloat(PREVIOUS_SCALE, capture.getScale());
-            }
             bundle.putFloatArray(CAPTURE_COORDINATES, new float[]{xPos, yPos});
             bundle.putFloatArray(SCREEN_SIZE, screenSize);
         }
@@ -333,9 +328,8 @@ public class GameBoardView extends View {
             if (capture != null) {
                 capture.setX(coordinates[0]);
                 capture.setY(coordinates[1]);
-                if (bundle.getInt(CAPTURE_TYPE) == LINE) {
+                if (bundle.getInt(CAPTURE_TYPE) == LINE)
                     capture.setAngle(bundle.getFloat(PREVIOUS_ANGLE));
-                }
             }
         }
     }
@@ -360,4 +354,3 @@ public class GameBoardView extends View {
 
     public String getPlayer2Name() { return board.getPlayer2Name(); }
 }
-

@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Control.CaptureSelectionActivity">
+    tools:context="edu.sdsmt.group4.Control.CaptureSelectionActivity">
 
     <ImageButton
         android:id="@+id/circleView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:contentDescription="@string/circle_description"
@@ -17,13 +17,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle"
-        android:background="@color/gray_800"
-        />
+        app:srcCompat="@drawable/circle" />
 
     <ImageButton
         android:id="@+id/rectangleView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:contentDescription="@string/rect_description"
@@ -32,13 +30,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circleView"
-        app:srcCompat="@drawable/rectangle"
-        android:background="@color/gray_800"
-        />
+        app:srcCompat="@drawable/rectangle" />
 
     <ImageButton
         android:id="@+id/lineView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -48,8 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rectangleView"
-        app:srcCompat="@drawable/line"
-        android:background="@color/gray_800"
-        />
+        app:srcCompat="@drawable/line" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

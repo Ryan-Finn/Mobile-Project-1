@@ -7,7 +7,7 @@
     <ImageButton
         android:id="@+id/circleView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="15dp"
         android:contentDescription="@string/circle_description"
         android:onClick="onCircleClick"
@@ -15,35 +15,32 @@
         app:layout_constraintEnd_toStartOf="@+id/rectangleView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circle"
-        android:background="@color/gray_800"/>
+        app:srcCompat="@drawable/circle" />
 
     <ImageButton
         android:id="@+id/rectangleView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_height="0dp"
         android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:contentDescription="@string/rect_description"
         android:onClick="onRectangleClick"
-        app:layout_constraintEnd_toStartOf="@+id/lineView"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lineView"
         app:layout_constraintStart_toEndOf="@+id/circleView"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle"
-        android:background="@color/gray_800"/>
+        app:srcCompat="@drawable/rectangle" />
 
     <ImageButton
         android:id="@+id/lineView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="15dp"
         android:contentDescription="@string/line_description"
         android:onClick="onLineClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rectangleView"
-        app:srcCompat="@drawable/line"
-        android:background="@color/gray_800"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line" />
 </androidx.constraintlayout.widget.ConstraintLayout>

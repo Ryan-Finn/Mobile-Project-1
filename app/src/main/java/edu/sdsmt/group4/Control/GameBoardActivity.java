@@ -40,8 +40,6 @@ public class GameBoardActivity extends AppCompatActivity {
         updateGUI();
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,15 +54,12 @@ public class GameBoardActivity extends AppCompatActivity {
         String name2 = intent.getStringExtra(WelcomeActivity.PLAYER2NAME_MESSAGE);
         String r = intent.getStringExtra(WelcomeActivity.ROUNDS_MESSAGE);
 
-        if (name1.isEmpty()) {
+        if (name1.isEmpty())
             name1 = getString(R.string.Name1);
-        }
-        if (name2.isEmpty()) {
+        if (name2.isEmpty())
             name2 = getString(R.string.Name2);
-        }
-        if (r.isEmpty() || Integer.parseInt(r) <= 0) {
+        if (r.isEmpty() || Integer.parseInt(r) <= 0)
             r = "5";
-        }
 
         view.addPlayer(name1,0);
         view.addPlayer(name2,1);
@@ -85,7 +80,7 @@ public class GameBoardActivity extends AppCompatActivity {
         rounds.setText(r);
         player1Name.setTextColor(Color.parseColor("#FF0000"));
 
-        
+
         //any target
         ActivityResultContracts.StartActivityForResult contract =
                 new ActivityResultContracts.StartActivityForResult();
@@ -95,15 +90,14 @@ public class GameBoardActivity extends AppCompatActivity {
                 Intent data = result.getData();
                 assert data != null;
                 //if no capture option is selected
-                    capture.setEnabled(true);
+                capture.setEnabled(true);
                 view.setCapture(data.getIntExtra(CAPTURED_INT, 0));
             }
         });
     }
 
     private void isEndGame() {
-        if(view.isEndGame())
-        {
+        if(view.isEndGame()) {
             String winner = "WINNER\n";
             int player1Score = Integer.parseInt(view.getPlayer1Score());
             int player2Score = Integer.parseInt(view.getPlayer2Score());
@@ -116,10 +110,11 @@ public class GameBoardActivity extends AppCompatActivity {
                     + "'s Score\n" + view.getPlayer2Score());
 
             //get the winner
-            winner += view.getPlayer2Name() ;
-            if( player1Score > player2Score)
-                winner = "WINNER\n" + view.getPlayer1Name();
-            if(player1Score == player2Score)
+            if (player1Score > player2Score)
+                winner += view.getPlayer1Name();
+            else if (player1Score < player2Score)
+                winner += view.getPlayer2Name();
+            else
                 winner = "TIE!";
             intent.putExtra(EndGameActivity.WINNER_MESSAGE, winner);
             startActivity(intent);
@@ -129,21 +124,20 @@ public class GameBoardActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void updateGUI() {
-
         int red = Color.parseColor("#FF0000");
         int black = Color.parseColor("#FFFFFF");
 
         switch (view.getCurrentPlayerId()) {
             case 0:Log.i("Inside 0", String.valueOf(view.getCurrentPlayerId()));
 
-            player1Name.setTextColor(red);
-            player2Name.setTextColor(black);
-            break;
+                player1Name.setTextColor(red);
+                player2Name.setTextColor(black);
+                break;
             case 1:
                 Log.i("Inside 1", String.valueOf(view.getCurrentPlayerId()));
-            player2Name.setTextColor(red);
-            player1Name.setTextColor(black);
-            break;
+                player2Name.setTextColor(red);
+                player1Name.setTextColor(black);
+                break;
         }
 
         player1Score.setText(view.getPlayer1Score());
@@ -151,7 +145,6 @@ public class GameBoardActivity extends AppCompatActivity {
         rounds.setText(view.getRounds());
         capture.setEnabled(view.isCaptureEnabled());
     }
-
 
     public void onCaptureClick(View v) {
         view.captureClicked();
@@ -170,9 +163,8 @@ public class GameBoardActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void onCaptureOptionsClick(View v) {
+    public void onCaptureOptionsClick(View view) {
         Intent switchActivityIntent = new Intent(this, CaptureSelectionActivity.class);
         captureResultLauncher.launch(switchActivityIntent);
     }
-
 }

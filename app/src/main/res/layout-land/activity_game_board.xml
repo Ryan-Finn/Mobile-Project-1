@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Control.GameBoardActivity">
+    tools:context="edu.sdsmt.group4.Control.GameBoardActivity">
 
     <edu.sdsmt.group4.View.GameBoardView
         android:id="@+id/gameBoardView"

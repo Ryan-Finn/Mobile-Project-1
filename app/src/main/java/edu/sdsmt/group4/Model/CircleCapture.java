@@ -23,9 +23,8 @@ public class CircleCapture extends CaptureObject {
             dist = (float) Math.sqrt(Math.pow(x - obj.getX(), 2) + Math.pow(y - obj.getY(), 2));
 
             // Check if the two circles intersect
-            if (obj.getRadius() + radius > dist) {
+            if (obj.getRadius() + radius > dist)
                 contained.add(obj);
-            }
         }
         return contained;
     }
@@ -37,4 +36,3 @@ public class CircleCapture extends CaptureObject {
         canvas.drawCircle(x, y, radius, p);
     }
 }
-

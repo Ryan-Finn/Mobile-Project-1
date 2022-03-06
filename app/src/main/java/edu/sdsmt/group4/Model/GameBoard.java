@@ -9,7 +9,8 @@ public class GameBoard {
     private static final String PLAYER_SCORES ="GameBoard.playerScores" ;
     private static final String CURRENT_PLAYER_ID = "GameBoard.currentPlayerScore";
     private final ArrayList<Collectable> collectables = new ArrayList<>();
-
+    private Player currentPlayer;
+    private final ArrayList<Player> players = new ArrayList<>();
     private final static String REL_LOCATIONS = "GameBoard.relLocations";
     private final static String LOCATIONS = "GameBoard.locations";
     private final static String IDS = "GameBoard.ids";
@@ -23,9 +24,6 @@ public class GameBoard {
             collectables.add(collectable);
         }
     }
-    private Player currentPlayer;
-    private final ArrayList<Player> players = new ArrayList<>();
-
 
     public ArrayList<Collectable> getCollectables() {
         return collectables;
@@ -33,12 +31,11 @@ public class GameBoard {
 
     public void capture(CaptureObject capture) {
         ArrayList<Collectable> collected = capture.getContainedCollectables(collectables);
-        for (Collectable c : collected) {
+        for (Collectable c : collected)
             collectables.remove(c);
-        }
         switch(currentPlayer.getId()) {
             case 0:
-              players.get(0).incScore(collected.size());
+                players.get(0).incScore(collected.size());
                 currentPlayer = players.get(1);
                 break;
             case 1:
@@ -64,8 +61,7 @@ public class GameBoard {
             locations[i * 2 + 1] = collectable.getY();
             ids[i] = collectable.getId();
         }
-        for(int i = 0; i < players.size(); i ++)
-        {
+        for(int i = 0; i < players.size(); i ++) {
             playerNames[i] = players.get(i).getName();
             playerScores[i] = players.get(i).getScore();
         }
@@ -100,30 +96,9 @@ public class GameBoard {
         {
             players.add(new Player(playerNames[i], i));
             players.get(i).incScore(playerScores[i]);
-
         }
 
         currentPlayer = new Player(players.get(id).getName(), id);
-
-        /* Old way of saving collectables
-        for (int i = 0; i < ids.length - 1; i++) {
-            for(int j = i + 1; j < collectables.size(); j++) {
-                if(ids[i] == collectables.get(j).getId()) {
-                    Collectable collectable = collectables.get(i);
-                    collectables.set(i, collectables.get(j));
-                    collectables.set(j, collectable);
-                }
-            }
-        }
-
-        for (int i = 0; i < ids.length-1; i++) {
-            Collectable collectable = collectables.get(i);
-            collectable.setRelX(relLocations[i*2]);
-            collectable.setRelY(relLocations[i*2+1]);
-            collectable.setX(locations[i*2]);
-            collectable.setY(locations[i*2+1]);
-            collectable.setShuffle(false);
-        }*/
     }
 
     public boolean isEndGame(){ return rounds <= 0 || collectables.isEmpty(); }
@@ -132,7 +107,7 @@ public class GameBoard {
 
     public void setDefaultPlayer() {
         if (!players.isEmpty())
-           currentPlayer = players.get(0);
+            currentPlayer = players.get(0);
     }
 
     public void setRounds(int r) { rounds = r; }
@@ -149,4 +124,3 @@ public class GameBoard {
 
     public String getPlayer2Name() { return players.get(1).getName(); }
 }
-

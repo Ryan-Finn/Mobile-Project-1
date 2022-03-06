@@ -2,8 +2,8 @@
     <string name="app_name">Group 4</string>
     <!-- Welcome -->
     <string name="WelcomeText">Welcome Players!</string>
-    <string name="NameInput1Hint">Player 1 Name</string>
-    <string name="NameInput2Hint">Player 2 Name</string>
+    <string name="NameInput1Hint">Player 1</string>
+    <string name="NameInput2Hint">Player 2</string>
     <string name="RoundsInputHint">Number of Rounds (1-inf)</string>
     <string name="StartButtonText">START GAME</string>
     <string name="HowToPlayButtonText">HOW TO PLAY</string>
@@ -29,22 +29,22 @@ CAPTURE OPTIONS\n\n
 
     <!-- GameBoard -->
     <string name="Name1">Player 1</string>
-    <string name="Player1ScoreString">Player 1 Score</string>
     <string name="Rounds">Rounds</string>
     <string name="Name2">Player 2</string>
-    <string name="Player2ScoreString">Player 2 Score</string>
+    <string name="capture_options">Capture Options</string>
     <string name="capture">Capture!</string>
+    <string name="QUIT_GAME">Quit Game?</string>
+    <string name="QUIT_GAME_MESSAGE">All progress in the game will be lost.</string>
 
     <!-- CaptureSelection -->
     <string name="circle_description">Circle_Capture</string>
     <string name="rect_description">Rectangle Image</string>
     <string name="line_description">Line image</string>
-    <string name="capture_options">Capture Options</string>
 
     <!-- EndGame -->
+    <string name="Player1ScoreString">Player 1 Score</string>
+    <string name="Player2ScoreString">Player 2 Score</string>
     <string name="winner_string">WINNER</string>
     <string name="return_string">PLAY AGAIN!</string>
-    <string name="QUIT_GAME">Quit Game?</string>
-    <string name="QUIT_GAME_MESSAGE">All progress in the game will be lost.</string>
 </resources>
 

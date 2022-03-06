@@ -11,15 +11,15 @@ public class Player {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public int getScore() {
-        return score;
+        return this.score;
     }
 
     public void incScore(int add) {

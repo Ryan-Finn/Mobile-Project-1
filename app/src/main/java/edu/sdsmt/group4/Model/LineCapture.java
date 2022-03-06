@@ -86,4 +86,3 @@ public class LineCapture extends CaptureObject {
     @Override
     public void setAngle(float angle) { this.angle = angle; }
 }
-

@@ -1,6 +1,5 @@
 package edu.sdsmt.group4.Control;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import edu.sdsmt.group4.R;
 
 public class EndGameActivity extends AppCompatActivity {
-
     public final static String PLAYER1_MESSAGE = "edu.sdsmt.group4.PLAYER1_MESSAGE";
     public final static String PLAYER2_MESSAGE  = "edu.sdsmt.group4.PLAYER2_MESSAGE";
     public final static String WINNER_MESSAGE  = "edu.sdsmt.group4.WINNER_MESSAGE";
@@ -32,15 +30,14 @@ public class EndGameActivity extends AppCompatActivity {
         player1.setText(intent.getStringExtra(PLAYER1_MESSAGE));
         player2.setText(intent.getStringExtra(PLAYER2_MESSAGE));
         winner.setText(intent.getStringExtra(WINNER_MESSAGE));
-
     }
 
     @Override
     public void onBackPressed() {
-      finish();
+        finish();
     }
 
-    public void onReturnClick(View v)
+    public void onReturnClick(View view)
     {
         finish();
     }

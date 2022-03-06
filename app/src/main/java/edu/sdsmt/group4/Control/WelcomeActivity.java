@@ -53,8 +53,6 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import edu.sdsmt.group4.Control.GameBoardActivity;
-
 import edu.sdsmt.group4.R;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -64,6 +62,7 @@ public class WelcomeActivity extends AppCompatActivity {
     TextView player1;
     TextView player2;
     TextView rounds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +75,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void onStart(View view) {
         Intent intent = new Intent(this, GameBoardActivity.class);
-
         intent.putExtra(PLAYER1NAME_MESSAGE, player1.getText().toString());
         intent.putExtra(PLAYER2NAME_MESSAGE, player2.getText().toString());
         intent.putExtra(ROUNDS_MESSAGE, rounds.getText().toString());

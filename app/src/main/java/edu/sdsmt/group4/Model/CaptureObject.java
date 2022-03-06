@@ -1,8 +1,8 @@
 package edu.sdsmt.group4.Model;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -59,19 +59,20 @@ public class CaptureObject {
     public void setAngle(float angle) {
     }
 
-    /* Debug function that shows hit boxes for all collectable objects
-    public void debug(Canvas canvas, ArrayList<Collectable> list) {
-        Paint p = new Paint();
-        ArrayList<Collectable> collected = getContainedCollectables(list);
-
-        for (Collectable obj : list) {
-            if (!collected.contains(obj))
-                p.setColor(Color.BLUE);
-            else
-                p.setColor(Color.GREEN);
-            p.setAlpha(40);
-            canvas.drawCircle(obj.getX(), obj.getY(), obj.getRadius(), p);
-        }
-    }*/
+// --Commented out by Inspection START (3/6/2022 1:08 AM):
+//    // Debug function that shows hit boxes for all collectable objects
+//    public void debug(Canvas canvas, ArrayList<Collectable> list) {
+//        Paint p = new Paint();
+//        ArrayList<Collectable> collected = getContainedCollectables(list);
+//
+//        for (Collectable obj : list) {
+//            if (!collected.contains(obj))
+//                p.setColor(Color.BLUE);
+//            else
+//                p.setColor(Color.GREEN);
+//            p.setAlpha(40);
+//            canvas.drawCircle(obj.getX(), obj.getY(), obj.getRadius(), p);
+//        }
+//    }
+// --Commented out by Inspection STOP (3/6/2022 1:08 AM)
 }
-

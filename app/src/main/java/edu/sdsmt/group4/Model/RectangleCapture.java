@@ -5,9 +5,9 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SquareCapture extends CaptureObject {
-    public SquareCapture() {
-        this.scale = .5f;
+public class RectangleCapture extends CaptureObject {
+    public RectangleCapture() {
+        this.scale = 0.5f;
     }
 
     private boolean intersects(Collectable obj) {
@@ -24,11 +24,9 @@ public class SquareCapture extends CaptureObject {
     public ArrayList<Collectable> getContainedCollectables(ArrayList<Collectable> list) {
         ArrayList<Collectable> contained = new ArrayList<>();
 
-        for (Collectable obj : list) {
-            if (intersects(obj) && random.nextFloat() <= 0.5 * 0.5f / scale) {
+        for (Collectable obj : list)
+            if (intersects(obj) && random.nextFloat() <= 0.5 * 0.5f / scale)
                 contained.add(obj);
-            }
-        }
 
         return contained;
     }
@@ -43,4 +41,3 @@ public class SquareCapture extends CaptureObject {
         canvas.drawRect(x - width/2,y - height/2,x + width/2,y + height/2, p);
     }
 }
-

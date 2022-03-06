@@ -5,11 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import edu.sdsmt.group4.R;
 
 public class CaptureSelectionActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,8 +15,7 @@ public class CaptureSelectionActivity extends AppCompatActivity {
     }
 
     public void onCircleClick(View view) {
-
-         clicked(0);
+        clicked(0);
     }
 
     public void onRectangleClick(View view) {
@@ -33,7 +30,6 @@ public class CaptureSelectionActivity extends AppCompatActivity {
     {
         Intent resultIntent = new Intent();
 
-
         //send the type of button that was clicked
         resultIntent.putExtra(GameBoardActivity.CAPTURED_INT, captureType);
 
@@ -42,8 +38,5 @@ public class CaptureSelectionActivity extends AppCompatActivity {
 
         //stop this activity and return
         finish();
-
-
     }
-
 }

@@ -1,11 +1,7 @@
 package edu.sdsmt.project1.Model;
 
 import android.content.Context;
-
 import android.os.Bundle;
-
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GameBoard {

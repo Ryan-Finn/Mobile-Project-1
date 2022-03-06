@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Project1">
         <activity
             android:name=".Control.GameBoardActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Control.CaptureSelectionActivity"
             android:exported="false" />
@@ -20,7 +21,8 @@
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

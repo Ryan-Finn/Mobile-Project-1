@@ -20,7 +20,11 @@ CAPTURE OPTIONS\n\n
         rectangle, the lower is the probability of capturing the coins. The capture probability of
         the default rectangle is 50 percent.\n\n
 3) Line - Collects coins that are underneath/near the line. Can be moved and rotated and have a 75
-        percent probability of capture.</string>
+        percent probability of capture.\n\n\n
+    NOTES\n\n
+    Capture button will be enabled only when a capture option is selected.\n\n
+    A round is over when both the players have used the capture button.\n\n
+    Default number of rounds are 5 and player names are "Player 1" and "Player 2".\n\n</string>
 
     <!-- GameBoard -->
     <string name="Name1">Player 1</string>

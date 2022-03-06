@@ -1,49 +1,4 @@
 package edu.sdsmt.project1.Control;
-/**
- * Project 1 Grading
- *
- * Group:
- * ____ 6pt No redundant activities
- * ____ 6pt How to play dialog
- * ____ 6pt Icons
- * ____ 6pt End activity
- * ____ 6pt Back button handled
- * How to open the "how to play dialog": ____
- *
- * Individual:
- *
- * 	Play activity and custom view
- *
- * 		____ 9pt Activity appearence
- * 		____ 16pt Static Custom View
- * 		____ 20pt Dynamic part of the Custom View
- * 		____ 15pt Rotation
- *
- * 	Welcome activity and Game Class
- *
- * 		____ 13pt Welcome activity appearence
- * 		____ 20pt Applying capture rules
- * 		____ 12pt Game state
- * 		____ 15pt Rotation
- * 		What is the probaility of the reactangle capture: _____
- *
- * 	Capture activity and activity sequencing
- *
- * 		____ 9pt Capture activity apearence
- * 		____ 16pt Player round sequencing
- * 		____ 20pt Move to next activity
- * 		____ 15pt Rotation
- *
- * 	Timer
- *
- * 		____ 9pt Timer activity
- * 		____ 24pt Graphic
- * 		____ 12pt Player turn end
- * 		____ 15pt Rotation
- *
- *
- * Please list any additional rules that may be needed to properly grade your project:
- */
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -84,6 +39,8 @@ public class GameBoardActivity extends AppCompatActivity {
         view.loadInstanceState(bundle);
         updateGUI();
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +92,8 @@ public class GameBoardActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Intent data = result.getData();
                 assert data != null;
+                //if no capture option is selected
+                    capture.setEnabled(true);
                 view.setCapture(data.getIntExtra(CAPTURED_INT, 0));
             }
         });
@@ -143,16 +102,22 @@ public class GameBoardActivity extends AppCompatActivity {
     private void isEndGame() {
         if(view.isEndGame())
         {
+            String winner = "WINNER\n";
+            int player1Score = Integer.parseInt(view.getPlayer1Score());
+            int player2Score = Integer.parseInt(view.getPlayer2Score());
+
             Intent intent = new Intent(this, EndGameActivity.class);
+
             intent.putExtra(EndGameActivity.PLAYER1_MESSAGE, view.getPlayer1Name()
-                    + "'s Score\n" + view.getPlayer1Score());
+                    + "'s Score\n" + view.getPlayer2Score());
             intent.putExtra(EndGameActivity.PLAYER2_MESSAGE, view.getPlayer2Name()
                     + "'s Score\n" + view.getPlayer2Score());
-            String winner = "WINNER\n"+ view.getPlayer2Name() ;
-            if(Integer.parseInt(view.getPlayer1Score()) > Integer.parseInt(view.getPlayer2Score()))
-                winner = "WINNER\n" + view.getPlayer1Name();
 
-            if(Integer.parseInt(view.getPlayer1Score()) == Integer.parseInt(view.getPlayer2Score()))
+            //get the winner
+            winner += view.getPlayer2Name() ;
+            if( player1Score > player2Score)
+                winner += view.getPlayer1Name();
+            if(player1Score == player2Score)
                 winner = "TIE!";
             intent.putExtra(EndGameActivity.WINNER_MESSAGE, winner);
             startActivity(intent);
@@ -164,27 +129,29 @@ public class GameBoardActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void updateGUI() {
 
-        if(view.getCurrentPlayerId() == 0) {
-            player1Name.setTextColor(Color.parseColor("#FF0000"));
-            player2Name.setTextColor(Color.parseColor("#FFFFFF"));
-        }
-        else if(view.getCurrentPlayerId() == 1) {
-            player2Name.setTextColor(Color.parseColor("#FF0000"));
-            player1Name.setTextColor(Color.parseColor("#FFFFFF"));
-        }
+        int red = Color.parseColor("#FF0000");
+        int black = Color.parseColor("#FFFFFF");
 
+        switch (view.getCurrentPlayerId()) {
+            case 0:
+            player1Name.setTextColor(red);
+            player2Name.setTextColor(black);
+
+            case 1:
+            player2Name.setTextColor(red);
+            player1Name.setTextColor(black);
+        }
 
         player1Score.setText(view.getPlayer1Score());
         player2Score.setText(view.getPlayer2Score());
         rounds.setText(view.getRounds());
-        capture.setEnabled(view.isCaptureEnabled());
+        capture.setEnabled(view.isCaptureOptionSelected());
     }
 
 
     public void onCaptureClick(View v) {
         view.captureClicked();
         updateGUI();
-        capture.setEnabled(false);
         isEndGame();
     }
 
@@ -202,7 +169,6 @@ public class GameBoardActivity extends AppCompatActivity {
     public void onCaptureOptionsClick(View v) {
         Intent switchActivityIntent = new Intent(this, CaptureSelectionActivity.class);
         captureResultLauncher.launch(switchActivityIntent);
-        capture.setEnabled(true);
     }
 
 }

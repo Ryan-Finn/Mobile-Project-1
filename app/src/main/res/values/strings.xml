@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Project 1</string>
     <!-- Welcome -->
-    <string name="WelcomeText">Project 1 Mobile Computing (Placeholder)</string>
-    <string name="NameInput1Hint">Player 1 Name</string>
-    <string name="NameInput2Hint">Player 2 Name</string>
-    <string name="RoundsInputHint">Number of Rounds (0-inf)</string>
+    <string name="WelcomeText">Project 1</string>
+    <string name="NameInput1Hint">Player 1</string>
+    <string name="NameInput2Hint">Player 2</string>
+    <string name="RoundsInputHint">Number of Rounds (5)</string>
     <string name="StartButtonText">START GAME</string>
     <string name="HowToPlayButtonText">HOW TO PLAY</string>
     <string name="HowToPlayTitle">How To Play</string>
@@ -16,11 +16,10 @@ Collect as many coins as possible using the capture options. The player with the
 CAPTURE OPTIONS\n\n
 1) Circle - Collects the nearest coins at 100 percent capture probability. Can be moved across the
         screen.\n\n
-2) Rectangle -  Collects coins that are underneath the rectangle and is resizeable. But larger the
+2) Rectangle - Collects the nearest coins and can be scaled. But the larger the
         rectangle, the lower is the probability of capturing the coins. The capture probability of
         the default rectangle is 50 percent.\n\n
-3) Line - Collects coins that are underneath/near the line. Can be moved and rotated and have a 75
-        percent probability of capture.\n\n\n
+3) Line - Collects the nearest coins and can be rotated. Has a 75 percent capture probability.\n\n\n
     NOTES\n\n
     Capture button will be enabled only when a capture option is selected.\n\n
     A round is over when both the players have used the capture button.\n\n

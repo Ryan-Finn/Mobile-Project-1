@@ -26,30 +26,27 @@ public class Collectable {
         this.height = bitmap.getHeight();
     }
 
-    public void draw(Canvas canvas, int canvasX, int canvasY) {
-        int canvas_width = canvas.getWidth();
-        int canvas_height = canvas.getHeight();
-
+    public void draw(Canvas canvas, float canvas_width, float canvas_height, float canvasX, float canvasY) {
         x = canvasX + relX * canvas_width;
         y = canvasY + relY * canvas_height;
+        float window_aspect = canvas.getWidth() / (float) canvas.getHeight();
+        float canvas_aspect = canvas_width / (float)canvas_height;
+        float second_scale = scale * canvas_aspect / window_aspect;
 
         canvas.save();
 
         canvas.translate(x, y);
-        canvas.scale(scale, scale);
+        canvas.scale(second_scale, second_scale);
         canvas.translate(-width / 2f, -height / 2f);
         canvas.drawBitmap(bitmap, 0, 0, null);
 
         canvas.restore();
     }
 
-    public void shuffle(Canvas canvas, int canvasX, int canvasY, Random rand) {
+    public void shuffle(float canvas_width, float canvas_height, float canvasX, float canvasY, Random rand) {
         if (!doShuffle) {
             return;
         }
-
-        int canvas_width = canvas.getWidth();
-        int canvas_height = canvas.getHeight();
 
         relX = rand.nextFloat();
         relY = rand.nextFloat();

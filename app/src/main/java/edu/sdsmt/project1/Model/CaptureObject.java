@@ -27,7 +27,7 @@ public class CaptureObject {
         return new ArrayList<>();
     }
 
-    public void draw(Canvas canvas, Paint p, Random random) {}
+    public void draw(Canvas canvas, float width, float height, Paint p, Random random) {}
 
     public float getX() {
         return x;

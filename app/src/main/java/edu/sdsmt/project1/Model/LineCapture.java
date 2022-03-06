@@ -69,10 +69,10 @@ public class LineCapture extends CaptureObject {
     }
 
     @Override
-    public void draw(Canvas canvas, Paint p, Random rand) {
+    public void draw(Canvas canvas, float canvas_width, float canvas_height, Paint p, Random rand) {
         random = rand;
-        width = 0.8f * Math.min(canvas.getWidth(), canvas.getHeight());
-        height = 0.1f * Math.min(canvas.getWidth(), canvas.getHeight());
+        width = 0.8f * Math.min(canvas_width, canvas_height);
+        height = 0.1f * Math.min(canvas_width, canvas_height);
         p.setStrokeWidth(0.1f * canvas.getWidth());
         double a = angle * Math.PI / 180;
         float dx = width * (float)Math.cos(a) / 2;

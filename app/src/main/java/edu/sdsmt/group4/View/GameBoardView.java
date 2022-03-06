@@ -1,4 +1,4 @@
-package edu.sdsmt.project1.View;
+package edu.sdsmt.group4.View;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,18 +12,19 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.Random;
-import edu.sdsmt.project1.Model.CaptureObject;
-import edu.sdsmt.project1.Model.CircleCapture;
-import edu.sdsmt.project1.Model.Collectable;
-import edu.sdsmt.project1.Model.GameBoard;
-import edu.sdsmt.project1.Model.LineCapture;
-import edu.sdsmt.project1.Model.SquareCapture;
+import edu.sdsmt.group4.Model.CaptureObject;
+import edu.sdsmt.group4.Model.CircleCapture;
+import edu.sdsmt.group4.Model.Collectable;
+import edu.sdsmt.group4.Model.GameBoard;
+import edu.sdsmt.group4.Model.LineCapture;
+import edu.sdsmt.group4.Model.SquareCapture;
 
 public class GameBoardView extends View {
     private static final String CAPTURE_TYPE = "gameBoard.CaptureType" ;
     private static final String CAPTURE_COORDINATES = "gameBoard.CaptureCoordinates";
     private static final String SCREEN_SIZE = "gameBoard.PreviousScreenSize";
     private static final String PREVIOUS_ANGLE = "gameBoard.PreviousAngle";
+    private static final String ROUNDS = "gameBoard.rounds";
     private GameBoard board;
     private static final Random random = new Random();
     public final int CIRCLE = 0;
@@ -297,6 +298,7 @@ public class GameBoardView extends View {
 
         // Save the capture type & data
         bundle.putInt(CAPTURE_TYPE, captureType);
+        bundle.putString(ROUNDS, board.getRounds());
         if (capture != null) {
             xPos = capture.getX() / screenSize[0];
             yPos = capture.getY() / screenSize[1];
@@ -326,6 +328,7 @@ public class GameBoardView extends View {
 
     public void loadInstanceState(Bundle bundle) {
         board.loadInstanceState(bundle);
+        board.setRounds(Integer.parseInt(bundle.getString(ROUNDS)));
         // Set the capture type and saved coordinates
         setCapture(bundle.getInt(CAPTURE_TYPE));
 

@@ -1,4 +1,4 @@
-package edu.sdsmt.project1.Model;
+package edu.sdsmt.group4.Model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,7 +21,7 @@ public class Collectable {
     public Collectable(Context context, int id, float scale) {
         this.id = id;
         this.scale = scale;
-        this.bitmap = BitmapFactory.decodeResource(context.getResources(), edu.sdsmt.project1.R.drawable.collectable);
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), edu.sdsmt.group4.R.drawable.collectable);
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
     }

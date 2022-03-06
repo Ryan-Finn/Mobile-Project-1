@@ -1,4 +1,4 @@
-package edu.sdsmt.project1.Control;
+package edu.sdsmt.group4.Control;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -10,16 +10,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import edu.sdsmt.project1.R;
-import edu.sdsmt.project1.View.GameBoardView;
-import edu.sdsmt.project1.WelcomeActivity;
+import edu.sdsmt.group4.R;
+import edu.sdsmt.group4.View.GameBoardView;
 
 public class GameBoardActivity extends AppCompatActivity {
     private GameBoardView view;
-    public static final String CAPTURED_INT = "edu.sdsmt.project1.RETURN_MESSAGE";
+    public static final String CAPTURED_INT = "edu.sdsmt.group4.RETURN_MESSAGE";
     private TextView player1Name;
     private TextView player2Name;
     private TextView player1Score;
@@ -44,6 +44,8 @@ public class GameBoardActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Log.i("Reached here", "reached");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_board);
         view = this.findViewById(R.id.gameBoardView);
@@ -60,7 +62,7 @@ public class GameBoardActivity extends AppCompatActivity {
         if (name2.isEmpty()) {
             name2 = getString(R.string.Name2);
         }
-        if (r.isEmpty()) {
+        if (r.isEmpty() || Integer.parseInt(r) <= 0) {
             r = "5";
         }
 
@@ -109,14 +111,14 @@ public class GameBoardActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EndGameActivity.class);
 
             intent.putExtra(EndGameActivity.PLAYER1_MESSAGE, view.getPlayer1Name()
-                    + "'s Score\n" + view.getPlayer2Score());
+                    + "'s Score\n" + view.getPlayer1Score());
             intent.putExtra(EndGameActivity.PLAYER2_MESSAGE, view.getPlayer2Name()
                     + "'s Score\n" + view.getPlayer2Score());
 
             //get the winner
             winner += view.getPlayer2Name() ;
             if( player1Score > player2Score)
-                winner += view.getPlayer1Name();
+                winner = "WINNER\n" + view.getPlayer1Name();
             if(player1Score == player2Score)
                 winner = "TIE!";
             intent.putExtra(EndGameActivity.WINNER_MESSAGE, winner);
@@ -125,7 +127,6 @@ public class GameBoardActivity extends AppCompatActivity {
         }
     }
 
-
     @SuppressLint("ClickableViewAccessibility")
     private void updateGUI() {
 
@@ -133,13 +134,16 @@ public class GameBoardActivity extends AppCompatActivity {
         int black = Color.parseColor("#FFFFFF");
 
         switch (view.getCurrentPlayerId()) {
-            case 0:
+            case 0:Log.i("Inside 0", String.valueOf(view.getCurrentPlayerId()));
+
             player1Name.setTextColor(red);
             player2Name.setTextColor(black);
-
+            break;
             case 1:
+                Log.i("Inside 1", String.valueOf(view.getCurrentPlayerId()));
             player2Name.setTextColor(red);
             player1Name.setTextColor(black);
+            break;
         }
 
         player1Score.setText(view.getPlayer1Score());

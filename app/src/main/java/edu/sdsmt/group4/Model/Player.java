@@ -1,4 +1,4 @@
-package edu.sdsmt.project1.Model;
+package edu.sdsmt.group4.Model;
 
 public class Player {
     private final String name;

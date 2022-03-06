@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Control.GameBoardActivity">
 
-    <edu.sdsmt.project1.View.GameBoardView
+    <edu.sdsmt.group4.View.GameBoardView
         android:id="@+id/gameBoardView"
         android:layout_width="0dp"
         android:layout_height="0dp"

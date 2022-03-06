@@ -1,15 +1,15 @@
-package edu.sdsmt.project1;
+package edu.sdsmt.group4.Control;
 
 /**
  * Project 1 Grading
  *
  * Group:
- * ____ 6pt No redundant activities
- * ____ 6pt How to play dialog
- * ____ 6pt Icons
- * ____ 6pt End activity
- * ____ 6pt Back button handled
- * How to open the "how to play dialog": ____
+ * Done 6pt No redundant activities
+ * Done 6pt How to play dialog
+ * Done 6pt Icons
+ * Done 6pt End activity
+ * Done 6pt Back button handled
+ * How to open the "how to play dialog": Click on the how to play button
  *
  * Individual:
  *
@@ -37,10 +37,10 @@ package edu.sdsmt.project1;
  *
  * 	Timer
  *
- * 		____ 9pt Timer activity
- * 		____ 24pt Graphic
- * 		____ 12pt Player turn end
- * 		____ 15pt Rotation
+ * 		NA 9pt Timer activity
+ * 		NA 24pt Graphic
+ * 		NA 12pt Player turn end
+ * 		NA 15pt Rotation
  *
  *
  * Please list any additional rules that may be needed to properly grade your project:
@@ -54,12 +54,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import edu.sdsmt.project1.Control.GameBoardActivity;
+import edu.sdsmt.group4.R;
 
 public class WelcomeActivity extends AppCompatActivity {
-    public final static String PLAYER1NAME_MESSAGE = "edu.sdsmt.project1.PLAYER1NAME_MESSAGE";
-    public final static String PLAYER2NAME_MESSAGE  = "edu.sdsmt.project1.PLAYER2NAME_MESSAGE";
-    public final static String ROUNDS_MESSAGE  = "edu.sdsmt.project1.ROUNDS_MESSAGE";
+    public final static String PLAYER1NAME_MESSAGE = "edu.sdsmt.group4.PLAYER1NAME_MESSAGE";
+    public final static String PLAYER2NAME_MESSAGE  = "edu.sdsmt.group4.PLAYER2NAME_MESSAGE";
+    public final static String ROUNDS_MESSAGE  = "edu.sdsmt.group4.ROUNDS_MESSAGE";
     TextView player1;
     TextView player2;
     TextView rounds;

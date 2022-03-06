@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Project 1</string>
+    <string name="app_name">Group 4</string>
     <!-- Welcome -->
     <string name="WelcomeText">Project 1 Mobile Computing (Placeholder)</string>
     <string name="NameInput1Hint">Player 1 Name</string>
     <string name="NameInput2Hint">Player 2 Name</string>
-    <string name="RoundsInputHint">Number of Rounds (0-inf)</string>
+    <string name="RoundsInputHint">Number of Rounds (1-inf)</string>
     <string name="StartButtonText">START GAME</string>
     <string name="HowToPlayButtonText">HOW TO PLAY</string>
     <string name="HowToPlayTitle">How To Play</string>
@@ -24,7 +24,9 @@ CAPTURE OPTIONS\n\n
     NOTES\n\n
     Capture button will be enabled only when a capture option is selected.\n\n
     A round is over when both the players have used the capture button.\n\n
-    Default number of rounds are 5 and player names are "Player 1" and "Player 2".\n\n</string>
+    Default number of rounds are 5 and player names are "Player 1" and "Player 2".\n\n
+
+    Invalid number of rounds will result in default settings for the rounds.</string>
 
     <!-- GameBoard -->
     <string name="Name1">Player 1</string>
@@ -42,7 +44,7 @@ CAPTURE OPTIONS\n\n
 
     <!-- EndGame -->
     <string name="winner_string">WINNER</string>
-    <string name="return_string">Return</string>
+    <string name="return_string">PLAY AGAIN!</string>
     <string name="QUIT_GAME">Quit Game?</string>
     <string name="QUIT_GAME_MESSAGE">All progress in the game will be lost.</string>
 </resources>

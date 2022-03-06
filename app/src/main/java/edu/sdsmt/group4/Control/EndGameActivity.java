@@ -40,4 +40,8 @@ public class EndGameActivity extends AppCompatActivity {
       finish();
     }
 
+    public void onReturnClick(View v)
+    {
+        finish();
+    }
 }

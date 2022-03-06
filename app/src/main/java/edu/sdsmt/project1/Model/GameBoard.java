@@ -1,17 +1,12 @@
 package edu.sdsmt.project1.Model;
 
 import android.content.Context;
-
 import android.os.Bundle;
-
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GameBoard {
     private static final String PLAYER_NAMES ="GameBoard.playerNames" ;
     private static final String PLAYER_SCORES ="GameBoard.playerScores" ;
-    private static final String CURRENT_PLAYER = "GameBoard.currentPlayer";
     private static final String CURRENT_PLAYER_ID = "GameBoard.currentPlayerScore";
     private final ArrayList<Collectable> collectables = new ArrayList<>();
 
@@ -19,7 +14,7 @@ public class GameBoard {
     private final static String LOCATIONS = "GameBoard.locations";
     private final static String IDS = "GameBoard.ids";
     private int rounds;
-    private Context context;
+    private final Context context;
 
     public GameBoard(Context context) {
         this.context = context;
@@ -110,7 +105,7 @@ public class GameBoard {
 
         currentPlayer = new Player(players.get(id).getName(), id);
 
-        /*
+        /* *
         for (int i = 0; i < ids.length - 1; i++) {
             for(int j = i + 1; j < collectables.size(); j++) {
                 if(ids[i] == collectables.get(j).getId()) {

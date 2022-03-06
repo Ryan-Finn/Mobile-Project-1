@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import edu.sdsmt.project1.Control.GameBoardActivity;
 import edu.sdsmt.project1.R;
 
 public class CaptureSelectionActivity extends AppCompatActivity {
@@ -36,7 +35,7 @@ public class CaptureSelectionActivity extends AppCompatActivity {
         Intent resultIntent = new Intent();
 
 
-        //grab the clicked button's text, and tag it for the caller activity to later find
+        //send the type of button that was clicked
         resultIntent.putExtra(GameBoardActivity.CAPTURED_INT, captureType);
 
         //say everything went OK

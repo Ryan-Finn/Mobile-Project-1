@@ -22,11 +22,12 @@ package edu.sdsmt.group4.Control;
  *
  * 	Welcome activity and Game Class
  *
- * 		____ 13pt Welcome activity appearance
- * 		____ 20pt Applying capture rules
- * 		____ 12pt Game state
- * 		____ 15pt Rotation
- * 		What is the probability of the rectangle capture: _____
+ * 		Done 13pt Welcome activity appearance
+ * 		Done 20pt Applying capture rules
+ * 		Done 12pt Game state
+ * 		Done 15pt Rotation
+ * 		What is the probability of the rectangle capture: starts with 50% and changes proportional
+ *       to the scaling. So if 2 times larger, probability is 25%
  *
  * 	Capture activity and activity sequencing
  *

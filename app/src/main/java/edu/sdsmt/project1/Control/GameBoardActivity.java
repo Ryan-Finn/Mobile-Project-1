@@ -1,5 +1,5 @@
 package edu.sdsmt.project1.Control;
-/**
+/* *
  * Project 1 Grading
  *
  * Group:
